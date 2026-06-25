@@ -1,601 +1,708 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MKMK — CS2 Club Hub</title>
-<meta name="description" content="Oficjalny hub paczki MKMK — rankingi, turnieje i strefa klubu w CS2." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght=500;600;700&family=Inter:wght=400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg-0:#06070a;
-    --bg-1:#0b0c10;
-    --bg-2:#1f2833;
-    --panel:rgba(20,24,30,0.55);
-    --panel-bd:rgba(0,255,136,0.12);
-    --neon:#00ff88;
-    --neon-soft:#00ffa180;
-    --gold:#f5c54b;
-    --silver:#cfd6df;
-    --bronze:#c98a4b;
-    --text:#e8eef3;
-    --muted:#8a95a3;
-    --radius:14px;
-    --t:.3s cubic-bezier(.2,.7,.2,1);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    font-family:'Inter',system-ui,sans-serif;
-    color:var(--text);
-    background:var(--bg-0);
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,.display{font-family:'Rajdhani',sans-serif;letter-spacing:.04em;text-transform:uppercase}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKMK - Premium Esports Platform</title>
+    <style>
+        :root {
+            --bg-color: #05070a;
+            --panel-bg: #0d1117;
+            --panel-card: #161b22;
+            --accent-color: #00ff66; /* Esportowa neonowa zieleń ze screena */
+            --accent-glow: rgba(0, 255, 102, 0.25);
+            --text-color: #8b949e;
+            --text-light: #f0f6fc;
+            --border-color: #21262d;
+        }
 
-  /* Animated background */
-  .bg{
-    position:fixed;inset:0;z-index:-2;
-    background:
-      radial-gradient(1200px 600px at 15% 10%, rgba(0,255,136,.12), transparent 60%),
-      radial-gradient(900px 500px at 90% 20%, rgba(245,197,75,.07), transparent 60%),
-      radial-gradient(1000px 700px at 50% 100%, rgba(0,255,136,.10), transparent 70%),
-      linear-gradient(180deg,#06070a 0%, #0b0c10 60%, #0a0d12 100%);
-    animation:bgShift 18s ease-in-out infinite alternate;
-  }
-  .bg::after{
-    content:"";position:absolute;inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-    background-size:42px 42px;
-    mask-image:radial-gradient(ellipse at center, black 40%, transparent 80%);
-  }
-  @keyframes bgShift{
-    0%{filter:hue-rotate(0) saturate(1)}
-    100%{filter:hue-rotate(12deg) saturate(1.15)}
-  }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
 
-  /* Nav */
-  .nav{
-    position:sticky;top:0;z-index:50;
-    backdrop-filter:blur(14px) saturate(140%);
-    background:rgba(8,10,14,.55);
-    border-bottom:1px solid rgba(255,255,255,.06);
-  }
-  .nav-inner{
-    max-width:1280px;margin:0 auto;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px 28px;
-  }
-  .logo{
-    display:flex;align-items:center;gap:12px;
-    font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;
-    letter-spacing:.25em;
-  }
-  .logo-mark{
-    width:38px;height:38px;border-radius:10px;
-    display:grid;place-items:center;
-    background:linear-gradient(135deg, #0c1014, #0a0d10);
-    border:1px solid rgba(0,255,136,.35);
-    box-shadow:0 0 18px rgba(0,255,136,.25), inset 0 0 12px rgba(0,255,136,.15);
-    color:var(--neon);font-size:12px;
-  }
-  .logo span.accent{color:var(--neon);text-shadow:0 0 14px rgba(0,255,136,.6)}
+        /* PASEK GÓRNY / HEADER */
+        header {
+            background-color: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 40px;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
 
-  .tabs{position:relative;display:flex;gap:8px}
-  .tab{
-    position:relative;
-    padding:10px 18px;border-radius:10px;
-    font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.15em;font-size:14px;
-    text-transform:uppercase;color:var(--muted);
-    background:transparent;border:none;cursor:pointer;
-    transition:color var(--t), background var(--t);
-  }
-  .tab:hover{color:#fff;background:rgba(255,255,255,.04)}
-  .tab.active{color:#fff}
-  .tab-indicator{
-    position:absolute;bottom:-2px;height:2px;
-    background:linear-gradient(90deg, transparent, var(--neon), transparent);
-    box-shadow:0 0 14px var(--neon);
-    border-radius:2px;
-    transition:left .45s cubic-bezier(.2,.7,.2,1), width .45s cubic-bezier(.2,.7,.2,1);
-    pointer-events:none;
-  }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
 
-  /* Hero */
-  .hero{
-    max-width:1280px;margin:0 auto;padding:64px 28px 24px;
-    display:flex;align-items:end;justify-content:space-between;gap:24px;flex-wrap:wrap;
-  }
-  .hero h1{
-    font-size:clamp(38px,6vw,72px);line-height:.95;
-    background:linear-gradient(180deg,#fff 30%, #8aa098 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero h1 .glow{color:var(--neon);text-shadow:0 0 28px rgba(0,255,136,.55);-webkit-text-fill-color:var(--neon)}
-  .hero p{color:var(--muted);max-width:520px;margin-top:14px;line-height:1.6}
-  .badge{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:6px 12px;border:1px solid rgba(0,255,136,.3);border-radius:999px;
-    color:var(--neon);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
-    background:rgba(0,255,136,.06);margin-bottom:18px;
-  }
-  .pulse{width:8px;height:8px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon);animation:pulse 1.6s infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-light);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
 
-  .stat-pills{display:flex;gap:14px;flex-wrap:wrap}
-  .pill{
-    padding:14px 18px;border-radius:12px;
-    background:var(--panel);border:1px solid rgba(255,255,255,.06);
-    backdrop-filter:blur(10px);
-    min-width:140px;
-  }
-  .pill .k{font-family:'Rajdhani';font-size:26px;font-weight:700;color:#fff}
-  .pill .l{font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-top:2px}
+        /* IKONA ZĘBATKI */
+        .settings-icon {
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: color 0.3s, transform 0.4s ease;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-  /* Sections */
-  main{max-width:1280px;margin:0 auto;padding:32px 28px 80px}
-  .section{display:none;animation:fadeUp .55s cubic-bezier(.2,.7,.2,1) both}
-  .section.active{display:block}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+        .settings-icon:hover {
+            color: var(--accent-color);
+            transform: rotate(90deg);
+        }
 
-  .section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 0 22px}
-  .section-head h2{font-size:28px;color:#fff}
-  .section-head .sub{color:var(--muted);font-size:13px;letter-spacing:.15em;text-transform:uppercase}
+        /* NAWIGACJA W PRAWYM GÓRNYM ROGU (NA WZÓR image_84a654.png) */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
 
-  /* Podium */
-  .podium{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:26px;
-  }
-  .podium-card{
-    position:relative;padding:22px;border-radius:var(--radius);
-    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
-    border:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);
-    overflow:hidden;
-    transition:transform var(--t), box-shadow var(--t), border-color var(--t);
-  }
-  .podium-card:hover{transform:translateY(-6px)}
-  .podium-card::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-    background:linear-gradient(135deg, transparent 60%, var(--ring,transparent) 120%);
-    opacity:.35;
-  }
-  .podium-card.gold{--ring:rgba(245,197,75,.4);border-color:rgba(245,197,75,.45);box-shadow:0 0 40px rgba(245,197,75,.12)}
-  .podium-card.silver{--ring:rgba(207,214,223,.35);border-color:rgba(207,214,223,.35)}
-  .podium-card.bronze{--ring:rgba(201,138,75,.35);border-color:rgba(201,138,75,.4)}
-  .podium-card.gold:hover{box-shadow:0 0 50px rgba(245,197,75,.25)}
+        .tabs-nav {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-  .place{
-    font-family:'Rajdhani';font-weight:700;font-size:64px;line-height:1;
-    background:linear-gradient(180deg,#fff, #6c7681);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    opacity:.85;
-  }
-  .gold .place{background:linear-gradient(180deg,#ffeaa0,#b8862b);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .silver .place{background:linear-gradient(180deg,#fff,#7e8893);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .bronze .place{background:linear-gradient(180deg,#ffd2a6,#7a4a1e);-webkit-background-clip:text;background-clip:text;color:transparent}
+        .tab-btn {
+            background: transparent;
+            border: 2px solid transparent;
+            color: #7d8590;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-  .nick{font-family:'Rajdhani';font-size:24px;font-weight:700;margin-top:6px}
-  .rank-row{display:flex;align-items:center;gap:10px;margin-top:10px}
-  .rating{font-family:'Rajdhani';font-size:28px;color:var(--neon);text-shadow:0 0 14px rgba(0,255,136,.4)}
-  .kpis{display:flex;gap:16px;margin-top:14px;color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-  .kpis b{color:#fff;font-family:'Rajdhani';font-size:16px;letter-spacing:.04em;display:block}
+        .tab-btn:hover {
+            color: var(--text-light);
+        }
 
-  /* Premier rank SVG badge */
-  .premier{
-    display:inline-flex;align-items:center;gap:6px;
-    padding:4px 10px;border-radius:8px;
-    background:linear-gradient(135deg, rgba(0,255,136,.12), rgba(0,255,136,.03));
-    border:1px solid rgba(0,255,136,.3);
-    font-family:'Rajdhani';font-weight:700;color:#fff;font-size:13px;letter-spacing:.05em;
-  }
-  .premier svg{width:14px;height:14px}
+        .tab-btn.active {
+            border-color: #ffffff;
+            color: #ffffff;
+            background-color: #070a0e;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
 
-  /* Leaderboard table */
-  .lb{
-    background:var(--panel);border:1px solid rgba(255,255,255,.06);
-    border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(10px);
-  }
-  .lb-row{
-    display:grid;grid-template-columns:60px 1.6fr 1fr 1fr 1fr 1fr;
-    align-items:center;padding:14px 20px;
-    border-bottom:1px solid rgba(255,255,255,.04);
-    transition:background var(--t), transform var(--t), box-shadow var(--t);
-  }
-  .lb-row.head{
-    background:rgba(255,255,255,.02);
-    color:var(--muted);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
-  }
-  .lb-row:not(.head):hover{
-    background:linear-gradient(90deg, rgba(0,255,136,.08), transparent);
-    transform:translateX(4px);
-    box-shadow:inset 3px 0 0 var(--neon), 0 0 24px rgba(0,255,136,.08);
-  }
-  .lb-row .rank{font-family:'Rajdhani';font-size:20px;color:var(--neon)}
-  .lb-row .player{display:flex;align-items:center;gap:12px}
-  .avatar{
-    width:38px;height:38px;border-radius:10px;
-    background:linear-gradient(135deg,#13181d,#0a0d10);
-    border:1px solid rgba(0,255,136,.25);
-    display:grid;place-items:center;font-family:'Rajdhani';font-weight:700;color:var(--neon);
-  }
+        /* PRO SYSTEM KONT */
+        .auth-zone {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 1px solid var(--border-color);
+            padding-left: 25px;
+        }
 
-  /* Tournaments */
-  .tabs-mini{display:flex;gap:8px;margin-bottom:18px}
-  .chip{
-    padding:8px 16px;border-radius:999px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
-    border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);
-    color:var(--muted);cursor:pointer;transition:all var(--t);font-family:'Rajdhani';font-weight:600;
-  }
-  .chip:hover{color:#fff;border-color:rgba(0,255,136,.35)}
-  .chip.active{color:var(--neon);border-color:var(--neon);box-shadow:0 0 18px rgba(0,255,136,.25)}
+        .auth-input {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+            transition: border 0.2s;
+        }
 
-  .matches{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-  .match{
-    position:relative;padding:18px;border-radius:var(--radius);
-    background:var(--panel);border:1px solid rgba(255,255,255,.06);
-    backdrop-filter:blur(10px);transition:all var(--t);overflow:hidden;
-  }
-  .match:hover{border-color:rgba(0,255,136,.35);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4), 0 0 30px rgba(0,255,136,.12)}
-  .match-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-  .status{font-family:'Rajdhani';font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:4px 10px;border-radius:6px}
-  .status.live{color:#fff;background:linear-gradient(90deg,#ff3344,#ff0044);box-shadow:0 0 16px rgba(255,0,68,.5);animation:livePulse 1.4s infinite}
-  .status.done{color:var(--muted);background:rgba(255,255,255,.06)}
-  .status.mvp{color:var(--gold);background:rgba(245,197,75,.12);border:1px solid rgba(245,197,75,.3)}
-  @keyframes livePulse{50%{opacity:.7}}
-  .teams{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
-  .team{display:flex;flex-direction:column;align-items:center;gap:8px}
-  .team-logo{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,#13181d,#0a0d10);border:1px solid rgba(0,255,136,.2);display:grid;place-items:center;font-family:'Rajdhani';font-weight:700;color:#fff}
-  .team-name{font-family:'Rajdhani';font-weight:600;letter-spacing:.1em}
-  .score{font-family:'Rajdhani';font-size:32px;font-weight:700;color:#fff}
-  .score .vs{color:var(--muted);font-size:14px}
-  .match-meta{margin-top:12px;display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+        .auth-input:focus {
+            border-color: var(--accent-color);
+        }
 
-  /* Bracket (Wersja 1/8 i wyżej) */
-  .bracket{
-    margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
-    background:var(--panel);border:1px solid rgba(255,255,255,.06);
-    padding:24px;border-radius:var(--radius);backdrop-filter:blur(10px);
-    overflow-x: auto;
-  }
-  .round{display:flex;flex-direction:column;gap:14px;justify-content:space-around}
-  .round h4{font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;text-align:center;margin-bottom:6px}
-  .br-match{
-    background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;
-    transition:all var(--t);
-  }
-  .br-match:hover{border-color:var(--neon);box-shadow:0 0 18px rgba(0,255,136,.15)}
-  .br-team{display:flex;justify-content:space-between;padding:6px 0;font-family:'Rajdhani';font-weight:600}
-  .br-team + .br-team{border-top:1px solid rgba(255,255,255,.05)}
-  .br-team.win{color:var(--neon)}
-  .br-team.win span:last-child{text-shadow:0 0 10px var(--neon)}
-  .br-team.win-discord{color:var(--gold)}
+        .btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
 
-  /* Club zone */
-  .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-  .clip-link{text-decoration:none;color:inherit;display:block}
-  .clip{
-    aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;
-    background:linear-gradient(135deg,#0e1216,#06080a);
-    border:1px solid rgba(255,255,255,.06);position:relative;cursor:pointer;
-    transition:all var(--t);
-  }
-  .clip::before{
-    content:"";position:absolute;inset:0;
-    background:radial-gradient(circle at center, rgba(0,255,136,.08), transparent 70%);
-    opacity:0;transition:opacity var(--t);
-  }
-  .clip:hover{transform:translateY(-4px);border-color:var(--neon);box-shadow:0 0 30px rgba(0,255,136,.2)}
-  .clip:hover::before{opacity:1}
-  .play{position:absolute;inset:0;display:grid;place-items:center}
-  .play-btn{
-    width:64px;height:64px;border-radius:50%;
-    background:rgba(0,255,136,.15);border:1px solid var(--neon);
-    display:grid;place-items:center;color:var(--neon);
-    backdrop-filter:blur(8px);transition:all var(--t);
-  }
-  .clip:hover .play-btn{transform:scale(1.1);background:var(--neon);color:#000;box-shadow:0 0 30px var(--neon)}
-  .clip-label{position:absolute;left:14px;bottom:12px;font-family:'Rajdhani';font-weight:600;letter-spacing:.05em}
-  .clip-label small{display:block;color:var(--muted);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+        .btn:hover {
+            background: var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
 
-  .hall{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-  .award{
-    padding:18px;border-radius:var(--radius);
-    background:var(--panel);border:1px solid rgba(255,255,255,.06);
-    backdrop-filter:blur(10px);transition:all var(--t);position:relative;overflow:hidden;
-  }
-  .award::after{
-    content:"";position:absolute;top:-30%;right:-30%;width:120px;height:120px;border-radius:50%;
-    background:radial-gradient(circle, rgba(0,255,136,.18), transparent 70%);
-    transition:transform var(--t);
-  }
-  .award:hover{border-color:rgba(0,255,136,.3);transform:translateY(-4px)}
-  .award:hover::after{transform:scale(1.4)}
-  .award .icon{font-size:24px;margin-bottom:8px}
-  .award h4{font-family:'Rajdhani';font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
-  .award .winner{font-family:'Rajdhani';font-size:22px;font-weight:700;color:#fff;margin-top:6px}
-  .award .desc{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5}
+        /* WYSUWANE PROFESJONALNE USTAWIENIA (Z LEWEJ DO PRAWEJ) */
+        .settings-sidebar {
+            position: fixed;
+            top: 0;
+            left: -350px;
+            width: 300px;
+            height: 100%;
+            background: #0d1117;
+            border-right: 1px solid var(--border-color);
+            box-shadow: 20px 0 40px rgba(0,0,0,0.6);
+            z-index: 999;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 30px;
+            box-sizing: border-box;
+        }
 
-  /* Stagger */
-  .stagger > *{opacity:0;transform:translateY(20px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards}
-  @keyframes rise{to{opacity:1;transform:none}}
-  .stagger > *:nth-child(1){animation-delay:.05s}
-  .stagger > *:nth-child(2){animation-delay:.12s}
-  .stagger > *:nth-child(3){animation-delay:.19s}
-  .stagger > *:nth-child(4){animation-delay:.26s}
+        .settings-sidebar.open {
+            transform: translateX(350px);
+        }
 
-  footer{max-width:1280px;margin:40px auto 30px;padding:24px 28px;border-top:1px solid rgba(255,255,255,.06);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
 
-  @media (max-width:760px){
-    .hero{padding-top:36px}
-    .podium{grid-template-columns:1fr}
-    .lb-row{grid-template-columns:40px 1.4fr 1fr 1fr;font-size:13px;padding:12px}
-    .lb-row .kd-col,.lb-row .wr-col{display:none}
-    .bracket{grid-template-columns:1fr}
-    .tabs{gap:0}
-    .tab{padding:10px 10px;font-size:12px}
-  }
-</style>
+        .sidebar-header h3 {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .close-sidebar {
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .close-sidebar:hover { color: #ff3b30; }
+
+        .setting-item {
+            margin-bottom: 25px;
+        }
+
+        .setting-item label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        /* GŁÓWNY KONTENER STYLIZACJI */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: slideUp 0.4s ease forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--text-light);
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        /* DRABINKA TURNIEJOWA */
+        .tournament-stage {
+            margin-bottom: 30px;
+        }
+
+        .stage-title {
+            background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 100%);
+            border-left: 4px solid var(--accent-color);
+            padding: 8px 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .match-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--panel-card);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .match-teams {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        .match-winner {
+            font-size: 13px;
+            font-weight: 700;
+            background: rgba(0, 255, 102, 0.1);
+            color: var(--accent-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 102, 0.2);
+        }
+
+        .match-winner.tbd {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            border-color: transparent;
+        }
+
+        .reward-box {
+            background: radial-gradient(circle at top left, rgba(0,255,102,0.1), transparent);
+            border: 1px dashed var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        /* TOPKI STYL */
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: var(--panel-card);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .rank { font-weight: 900; color: var(--accent-color); width: 35px; }
+        .username { flex-grow: 1; font-weight: 600; color: var(--text-light); }
+        .score { font-weight: bold; background: var(--bg-color); padding: 6px 16px; border-radius: 6px; border: 1px solid var(--border-color); color: #fff;}
+
+        /* KLIPY */
+        .clip-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        .clip-form input { width: 100%; box-sizing: border-box; }
+        .clips-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .clip-card { background: var(--panel-card); border: 1px solid var(--border-color); padding: 25px; border-radius: 12px; }
+        .clip-title { font-weight: bold; font-size: 18px; color: var(--text-light); margin-bottom: 6px; }
+        .clip-meta { font-size: 13px; color: var(--text-color); margin-bottom: 15px; }
+        .clip-link { color: var(--accent-color); text-decoration: none; font-weight: bold; }
+
+        /* MODAL ADMIN PANEL */
+        .admin-trigger {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            background: #0d1117;
+            color: #333;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            z-index: 1000;
+            border: 1px solid var(--border-color);
+        }
+        .admin-trigger:hover { color: var(--accent-color); }
+
+        .admin-modal {
+            position: fixed;
+            bottom: 50px;
+            left: 15px;
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            width: 340px;
+            display: none;
+            z-index: 1001;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .admin-modal textarea {
+            width: 100%; height: 75px;
+            background: var(--bg-color); color: white;
+            border: 1px solid var(--border-color); border-radius: 6px;
+            margin-bottom: 10px; font-family: monospace;
+            box-sizing: border-box; padding: 8px;
+        }
+    </style>
 </head>
 <body>
-<div class="bg"></div>
 
-<header class="nav">
-  <div class="nav-inner">
-    <div class="logo">
-      <div class="logo-mark">MK</div>
-      <span>MK<span class="accent">MK</span></span>
-    </div>
-    <nav class="tabs" id="tabs">
-      <button class="tab active" data-tab="topki">Topki</button>
-      <button class="tab" data-tab="turnieje">Turnieje</button>
-      <button class="tab" data-tab="klub">Strefa Klubu</button>
-      <span class="tab-indicator" id="indicator"></span>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div>
-    <span class="badge"><span class="pulse"></span> Sezon Premier · Live</span>
-    <h1>Klan <span class="glow">MKMK</span><br/>CS2 Hub</h1>
-    <p>Centrum dowodzenia paczki — rankingi, drabinki turniejowe i najlepsze momenty z naszych sesji.</p>
-  </div>
-  <div class="stat-pills stagger">
-    <div class="pill"><div class="k">4</div><div class="l">Aktywnych graczy</div></div>
-    <div class="pill"><div class="k">78</div><div class="l">Rozegranych meczy</div></div>
-    <div class="pill"><div class="k">35%</div><div class="l">Średni Win rate</div></div>
-  </div>
-</section>
-
-<main>
-  <!-- TOPKI -->
-  <section class="section active" id="topki">
-    <div class="section-head">
-      <h2>Ranking Paczki</h2>
-      <span class="sub">Sezon 2 · Premier</span>
-    </div>
-
-    <div class="podium stagger">
-      <!-- MIEJSCE 2: Chysik -->
-      <div class="podium-card silver">
-        <div class="place">02</div>
-        <div class="nick">Chysik</div>
-        <div class="rank-row">
-          <span class="premier"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg> 3 964</span>
+    <!-- PASEK GÓRNY -->
+    <header>
+        <div class="header-left">
+            <div class="settings-icon" onclick="toggleSidebar()">⚙️</div>
+            <div class="logo">MKMK</div>
         </div>
-        <div class="kpis"><div><b>0.96</b>K/D</div><div><b>50%</b>Win Rate</div></div>
-      </div>
-      <!-- MIEJSCE 1: pientaszek27 -->
-      <div class="podium-card gold">
-        <div class="place">01</div>
-        <div class="nick">pientaszek27</div>
-        <div class="rank-row">
-          <span class="premier"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg> 4 667</span>
+
+        <div class="header-right">
+            <!-- Zakładki w prawym górnym rogu na wzór screena -->
+            <nav class="tabs-nav">
+                <button class="tab-btn active" onclick="switchTab('topki')">Topki</button>
+                <button class="tab-btn" onclick="switchTab('turnieje')">Turnieje</button>
+                <button class="tab-btn" onclick="switchTab('klipy')">Strefa Klubu</button>
+            </nav>
+
+            <div class="auth-zone" id="authZone"></div>
         </div>
-        <div class="kpis"><div><b>0.63</b>K/D</div><div><b>43%</b>Win Rate</div></div>
-      </div>
-      <!-- MIEJSCE 3: mr.monkax -->
-      <div class="podium-card bronze">
-        <div class="place">03</div>
-        <div class="nick">mr.monkax</div>
-        <div class="rank-row">
-          <span class="premier"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg> 3 455</span>
+    </header>
+
+    <!-- ROZSUWANY BOCZNY PANEL USTAWIEŃ (Z LEWEJ DO PRAWEJ) -->
+    <div class="settings-sidebar" id="settingsSidebar">
+        <div class="sidebar-header">
+            <h3>Ustawienia Strony</h3>
+            <div class="close-sidebar" onclick="toggleSidebar()">✕</div>
         </div>
-        <div class="kpis"><div><b>1.07</b>K/D</div><div><b>30%</b>Win Rate</div></div>
-      </div>
+        
+        <div class="setting-item">
+            <label>Tryb Streamera</label>
+            <input type="checkbox" id="streamerToggle"> Ukryj tagi graczy
+        </div>
+
+        <div class="setting-item">
+            <label>Częstotliwość Odświeżania</label>
+            <select class="auth-input" style="width:100%;">
+                <option>W czasie rzeczywistym (Live)</option>
+                <option>Co 5 minut</option>
+            </select>
+        </div>
+
+        <div class="setting-item">
+            <label>Status Serwerów API</label>
+            <span style="color:var(--accent-color); font-size:13px; font-weight:bold;">● Operacyjny</span>
+        </div>
     </div>
 
-    <div class="lb stagger">
-      <div class="lb-row head">
-        <div>#</div><div>Gracz</div><div>Premier</div><div class="kd-col">K/D</div><div class="wr-col">Win Rate</div><div>Mecze</div>
-      </div>
-      <div class="lb-row"><div class="rank">01</div><div class="player"><div class="avatar" style="color:var(--gold); border-color:rgba(245,197,75,.4);">P2</div>pientaszek27</div><div><span class="premier">4 667</span></div><div class="kd-col">0.63</div><div class="wr-col">43%</div><div>14</div></div>
-      <div class="lb-row"><div class="rank">02</div><div class="player"><div class="avatar" style="color:var(--silver); border-color:rgba(207,214,223,.4)">CH</div>Chysik</div><div><span class="premier">3 964</span></div><div class="kd-col">0.96</div><div class="wr-col">50%</div><div>21</div></div>
-      <div class="lb-row"><div class="rank">03</div><div class="player"><div class="avatar" style="color:var(--bronze); border-color:rgba(201,138,75,.4)">MX</div>mr.monkax</div><div><span class="premier">3 455</span></div><div class="kd-col">1.07</div><div class="wr-col">30%</div><div>20</div></div>
-      <div class="lb-row"><div class="rank">04</div><div class="player"><div class="avatar">MK</div>M____K</div><div><span class="premier">1 000</span></div><div class="kd-col">0.74</div><div class="wr-col">17%</div><div>24</div></div>
-    </div>
-  </section>
+    <!-- GŁÓWNA ZAWARTOŚĆ -->
+    <div class="container">
 
-  <!-- TURNIEJE -->
-  <section class="section" id="turnieje">
-    <div class="section-head">
-      <h2>Turnieje MKMK</h2>
-      <span class="sub">Wewnętrzne rozgrywki klanu</span>
-    </div>
+        <!-- ZAKŁADKA: TOPKI -->
+        <div id="topki" class="tab-content active">
+            <div class="panel">
+                <h2>🏆 Topka LVL FaceIT</h2>
+                <div id="faceitListContainer"></div>
+            </div>
 
-    <div class="tabs-mini">
-      <button class="chip active" data-filter="live">Drabinka i Mecze</button>
-    </div>
+            <div class="panel">
+                <h2>🗡️ Topka PKT (Eventy & Turnieje)</h2>
+                <div id="pktListContainer"></div>
+            </div>
+        </div>
 
-    <div class="matches stagger" id="matches-live">
-      <div class="match">
-        <div class="match-top"><span class="status live">● Ostatni Wynik</span><span class="status mvp">Winner: Monkey</span></div>
-        <div class="teams">
-          <div class="team"><div class="team-logo">P</div><div class="team-name">Pientaszek</div></div>
-          <div class="score"><span class="vs">vs</span></div>
-          <div class="team"><div class="team-logo">M</div><div class="team-name">Monkey</div></div>
+        <!-- ZAKŁADKA: TURNIEJE -->
+        <div id="turnieje" class="tab-content">
+            <div class="panel">
+                <h2>⚔️ Aktualne Rozgrywki Drabinkowe</h2>
+                <div id="bracketContainer"></div>
+            </div>
         </div>
-        <div class="match-meta"><span>1/8 Finału</span><span style="color:var(--gold)">@thewhitemonkeyx</span></div>
-      </div>
-      <div class="match">
-        <div class="match-top"><span class="status live">● Ostatni Wynik</span><span class="status mvp">Winner: Pozdro</span></div>
-        <div class="teams">
-          <div class="team"><div class="team-logo">MK</div><div class="team-name">M____K</div></div>
-          <div class="score"><span class="vs">vs</span></div>
-          <div class="team"><div class="team-logo">CH</div><div class="team-name">Chysik</div></div>
-        </div>
-        <div class="match-meta"><span>1/8 Finału</span><span style="color:var(--gold)">@pozdromordzia_</span></div>
-      </div>
-    </div>
 
-    <!-- DRABINKA TURNIEJOWA -->
-    <div class="bracket stagger">
-      <div class="round">
-        <h4>1/8 Finału</h4>
-        <div class="br-match">
-          <div class="br-team"><span>Pientaszek</span></div>
-          <div class="br-team win"><span>Monkey</span><span class="br-team win-discord">➔ @thewhitemonkeyx</span></div>
-        </div>
-        <div class="br-match">
-          <div class="br-team"><span>M____K</span></div>
-          <div class="br-team win"><span>Chysik</span><span class="br-team win-discord">➔ @pozdromordzia_</span></div>
-        </div>
-      </div>
-      
-      <div class="round">
-        <h4>Ćwierćfinał 1/4</h4>
-        <div class="br-match">
-          <div class="br-team"><span>Wygrany 1</span></div>
-          <div class="br-team"><span>Wygrany 2</span></div>
-        </div>
-        <div class="br-match">
-          <div class="br-team"><span>Przegrany 1</span></div>
-          <div class="br-team win"><span>Przegrany 2</span><span class="br-team win-discord">➔ @mlodakaczka99</span></div>
-        </div>
-      </div>
-      
-      <div class="round">
-        <h4>Półfinał 1/2</h4>
-        <div class="br-match">
-          <div class="br-team"><span>Wygrany 1</span></div>
-          <div class="br-team"><span>Wygrany 2</span></div>
-        </div>
-        <div class="br-match">
-          <div class="br-team"><span>Wygrany 1</span></div>
-          <div class="br-team"><span>Wygrany 3</span></div>
-        </div>
-        <div class="br-match">
-          <div class="br-team"><span>Wygrany 2</span></div>
-          <div class="br-team"><span>Wygrany 3</span></div>
-        </div>
-      </div>
-      
-      <div class="round">
-        <h4>Finał 1/1</h4>
-        <div class="br-match">
-          <div class="br-team"><span>Wygrany</span></div>
-          <div class="br-team"><span>Wygrany</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- ZAKŁADKA: KLIPY -->
+        <div id="klipy" class="tab-content">
+            <div class="panel">
+                <h2>🎬 Opublikuj Nową Akcję</h2>
+                <div id="clipFormContainer" style="display:none;">
+                    <div class="clip-form">
+                        <input type="text" id="cName" class="auth-input" placeholder="Nazwa akcji">
+                        <input type="date" id="cDate" class="auth-input">
+                        <input type="text" id="cUrl" class="auth-input" style="grid-column: span 2;" placeholder="Link do klipu (YouTube, Medal...)">
+                        <button class="btn" style="grid-column: span 2;" onclick="submitClip()">Wyślij Klip</button>
+                    </div>
+                </div>
+                <p id="clipWarn" style="margin:0;">Zaloguj się w prawym górnym rogu, aby zarządzać i dodawać klipy.</p>
+            </div>
 
-  <!-- STREFA KLUBU -->
-  <section class="section" id="klub">
-    <div class="section-head">
-      <h2>Strefa Klubu</h2>
-      <span class="sub">Klipy · memy · sala chwały</span>
+            <div class="panel">
+                <h2>🎬 Najnowsze Klipy Społeczności</h2>
+                <div class="clips-grid" id="clipsContainer"></div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="video-grid stagger">
-      <!-- KLIP 1: Pientaszek27 -->
-      <a href="https://medal.tv/pl/games/counter-strike-2/clips/mYMZGgVrWcg6AcRlo?invite=cr-MSxRRFYsNDI3NzYwNjc2&v=4" target="_blank" class="clip-link">
-        <div class="clip">
-          <div class="play"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div>
-          <div class="clip-label">debil roku<small>Pientaszek27 · 1 dzień temu</small></div>
+    <!-- PANEL ADMINISTRATORA -->
+    <div class="admin-trigger" onclick="openAdminModal()">🔒 Admin Panel</div>
+    <div class="admin-modal" id="adminModal">
+        <div style="display:flex; justify-content:between; align-items:center; margin-bottom:15px;">
+            <h3 style="margin:0; color:white; font-size:14px;">MKMK Dashboard</h3>
+            <span style="cursor:pointer;" onclick="closeAdminModal()">✕</span>
         </div>
-      </a>
-      <!-- KLIP 2: mr.monkax -->
-      <a href="https://medal.tv/games/counter-strike-2/clips/mYP5s8Ae1lTU46ZTc?invite=cr-MSxFaHosMjA0NTI1ODE1&v=9" target="_blank" class="clip-link">
-        <div class="clip">
-          <div class="play"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div>
-          <div class="clip-label">lineup do movement xd<small>mr.monkax · 3 tygodnie temu</small></div>
+        
+        <div id="adminLoginBlock">
+            <input type="password" id="adminPasswordInput" class="auth-input" placeholder="Hasło" style="width:100%; margin-bottom:10px; box-sizing:border-box;">
+            <button class="btn" style="width:100%;" onclick="authAdmin()">Zaloguj Panel</button>
         </div>
-      </a>
-      <!-- KLIP 3: Chysik (Zapasowy, stary klip) -->
-      <div class="clip">
-        <div class="play"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="clip-label">AWP Flickshot<small>Chysik · tydzień temu</small></div>
-      </div>
+
+        <div id="adminPanelControls" style="display:none;">
+            <label style="font-size:10px;">Topka FaceIT:</label>
+            <textarea id="rawFaceitText"></textarea>
+
+            <label style="font-size:10px;">Topka Punktowa:</label>
+            <textarea id="rawPktText"></textarea>
+
+            <label style="font-size:10px;">Drabinka Turnieju (Format: Runda|Gracz1 vs Gracz2|Zwycięzca):</label>
+            <textarea id="rawBracketText" style="height:110px;"></textarea>
+
+            <button class="btn" style="width:100%;" onclick="saveAdminData()">Zapisz Zmiany</button>
+        </div>
     </div>
 
-    <div class="section-head" style="margin-top:36px">
-      <h2 style="font-size:22px">Sala Chwały · Tydzień</h2>
-      <span class="sub">Nagrody społeczności</span>
-    </div>
-    <div class="hall stagger">
-      <div class="award"><div class="icon">👑</div><h4>Lider Sezonu</h4><div class="winner">pientaszek27</div><div class="desc">4667 punktów na koncie. Król szos, nikt go na ten moment nie dogoni.</div></div>
-      <div class="award"><div class="icon">🎯</div><h4>Stabilna Forma</h4><div class="winner">Chysik</div><div class="desc">Równe 50% wygranych meczy i zasłużone drugie miejsce w tabeli.</div></div>
-      <div class="award"><div class="icon">⚔️</div><h4>Fragger Paczki</h4><div class="winner">mr.monkax</div><div class="desc">Najlepsze K/D (1.07), chociaż punkty premier domagają się małego pushu.</div></div>
-      <div class="award"><div class="icon">💸</div><h4>Inwestor Tygodnia</h4><div class="winner">M____K</div><div class="desc">Okunio równe 1000 pkt. Trzymamy eco, ale w sercu zawsze pełny force-buy!</div></div>
-    </div>
-  </section>
-</main>
+    <script>
+        // --- DATA INITIALIZATION ---
+        const initFaceit = "M____K|3 Level|(758)\nHuzarjr|2 Level|(665)\nmr.monkax|Brak Rangi|\npientaszek27|Brak Rangi|\n77panda|Brak Rangi|(Nie może grać)";
+        const initPkt = "Huzarjr|1 pkt\nmr.monkax|1 pkt\nM____K|0 pkt\n77panda|0 pkt\npientaszek27|-2 pkt";
+        
+        const initBracket = "1/8 Finału|Pientaszek vs Monkey|@mr.monkax\n1/8 Finału|M____K vs Chysik|@Huzarjr\nĆwierćFinał 1/4|Wygrany vs Wygrany|???\nĆwierćFinał 1/4|Przegrany vs Przegrany|@M____K\nPółFinał 1/2|Wygrany1 vs Wygrany2|???\nPółFinał 1/2|Wygrany1 vs Wygrany3|???\nPółFinał 1/2|Wygrany2 vs Wygrany3|???\nFinał 1/1|Wygrany vs Wygrany|???\nWINNER|Finałowy Zwycięzca|???";
 
-<footer>
-  <div>© MKMK Clan · Built for Discord · CS2 Hub</div>
-  <div>Made with <span style="color:var(--neon)">●</span> & coffee</div>
-</footer>
+        const initClips = [
+            { name: "M____K deagle 4k", date: "2026-06-10", url: "https://youtube.com/watch?v=example1", author: "M____K" },
+            { name: "Huzarjr ninja-defuse 1v3", date: "2026-06-14", url: "https://medal.tv/clips/example2", author: "Huzarjr" }
+        ];
 
-<script>
-  // Tab switching with sliding indicator
-  const tabs = document.querySelectorAll('.tab');
-  const indicator = document.getElementById('indicator');
-  const sections = document.querySelectorAll('.section');
+        if(!localStorage.getItem('topFaceit')) localStorage.setItem('topFaceit', initFaceit);
+        if(!localStorage.getItem('topPkt')) localStorage.setItem('topPkt', initPkt);
+        if(!localStorage.getItem('tournamentBracket')) localStorage.setItem('tournamentBracket', initBracket);
+        if(!localStorage.getItem('userClips')) localStorage.setItem('userClips', JSON.stringify(initClips));
 
-  function moveIndicator(el){
-    const rect = el.getBoundingClientRect();
-    const parentRect = el.parentElement.getBoundingClientRect();
-    indicator.style.left = (rect.left - parentRect.left) + 'px';
-    indicator.style.width = rect.width + 'px';
-  }
+        // --- TABS NAVIGATION ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
 
-  function activate(tab){
-    tabs.forEach(t => t.classList.toggle('active', t === tab));
-    const id = tab.dataset.tab;
-    sections.forEach(s => {
-      if(s.id === id){
-        s.classList.add('active');
-        s.querySelectorAll('.stagger').forEach(g => {
-          g.style.animation = 'none';
-          void g.offsetWidth;
-          g.style.animation = '';
-          [...g.children].forEach(c => { c.style.animation='none'; void c.offsetWidth; c.style.animation=''; });
-        });
-      } else {
-        s.classList.remove('active');
-      }
-    });
-    moveIndicator(tab);
-  }
+        // --- SIDEBAR SLIDE (LEFT TO RIGHT) ---
+        function toggleSidebar() {
+            document.getElementById('settingsSidebar').classList.toggle('open');
+        }
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => activate(tab));
-    tab.addEventListener('mouseenter', () => moveIndicator(tab));
-  });
-  document.getElementById('tabs').addEventListener('mouseleave', () => {
-    const active = document.querySelector('.tab.active');
-    if(active) moveIndicator(active);
-  });
+        // --- ACCOUNT MANAGEMENT ---
+        function updateAuthBar() {
+            const logged = localStorage.getItem('activeUser');
+            const zone = document.getElementById('authZone');
+            const formBox = document.getElementById('clipFormContainer');
+            const warnBox = document.getElementById('clipWarn');
 
-  window.addEventListener('load', () => moveIndicator(document.querySelector('.tab.active')));
-  window.addEventListener('resize', () => moveIndicator(document.querySelector('.tab.active')));
-</script>
+            if(logged) {
+                zone.innerHTML = `<span style="color:var(--text-light); font-weight:700; font-size:13px; margin-right:10px;">● ${logged}</span> <button class="btn" style="background:#21262d; color:#fff;" onclick="userLogout()">Wyloguj</button>`;
+                if(formBox) formBox.style.display = 'block';
+                if(warnBox) warnBox.style.display = 'none';
+            } else {
+                zone.innerHTML = `
+                    <input type="text" id="uNick" class="auth-input" placeholder="Użytkownik" style="width:110px; height:36px; padding:0 10px; box-sizing:border-box;">
+                    <input type="password" id="uPass" class="auth-input" placeholder="Hasło" style="width:110px; height:36px; padding:0 10px; box-sizing:border-box;">
+                    <button class="btn" style="height:36px; padding:0 15px;" onclick="userLogin()">Zaloguj</button>
+                `;
+                if(formBox) formBox.style.display = 'none';
+                if(warnBox) warnBox.style.display = 'block';
+            }
+        }
+
+        function userLogin() {
+            const n = document.getElementById('uNick').value.trim();
+            const p = document.getElementById('uPass').value;
+            if(!n || !p) return alert('Podaj dane logowania!');
+            localStorage.setItem('activeUser', n);
+            updateAuthBar();
+        }
+
+        function userLogout() {
+            localStorage.removeItem('activeUser');
+            updateAuthBar();
+        }
+
+        // --- RENDER CLIPS ---
+        function drawClips() {
+            const list = JSON.parse(localStorage.getItem('userClips'));
+            const container = document.getElementById('clipsContainer');
+            container.innerHTML = '';
+            list.forEach(c => {
+                container.innerHTML += `
+                    <div class="clip-card">
+                        <div class="clip-title">${c.name}</div>
+                        <div class="clip-meta">Utworzono: <strong>${c.date}</strong> | Gracz: <strong>${c.author}</strong></div>
+                        <a href="${c.url}" target="_blank" class="clip-link">Uruchom powtórkę →</a>
+                    </div>
+                `;
+            });
+        }
+
+        function submitClip() {
+            const name = document.getElementById('cName').value.trim();
+            const date = document.getElementById('cDate').value;
+            const url = document.getElementById('cUrl').value.trim();
+            const author = localStorage.getItem('activeUser');
+
+            if(!name || !date || !url) return alert('Wypełnij pola!');
+
+            const current = JSON.parse(localStorage.getItem('userClips'));
+            current.unshift({ name, date, url, author });
+            localStorage.setItem('userClips', JSON.stringify(current));
+
+            document.getElementById('cName').value = '';
+            document.getElementById('cDate').value = '';
+            document.getElementById('cUrl').value = '';
+            drawClips();
+        }
+
+        // --- RENDER TABLES & BRACKET ---
+        function drawLeaderboards() {
+            // Faceit
+            const fRaw = localStorage.getItem('topFaceit').split('\n');
+            const fContainer = document.getElementById('faceitListContainer');
+            fContainer.innerHTML = '';
+            fRaw.forEach((row, i) => {
+                if(!row.trim()) return;
+                const p = row.split('|');
+                fContainer.innerHTML += `
+                    <div class="leaderboard-item">
+                        <div class="rank">#0${i+1}</div>
+                        <div class="username">@${p[0]}</div>
+                        <div class="score">${p[1]} ${p[2]||''}</div>
+                    </div>
+                `;
+            });
+
+            // Punkty
+            const pRaw = localStorage.getItem('topPkt').split('\n');
+            const pContainer = document.getElementById('pktListContainer');
+            pContainer.innerHTML = '';
+            pRaw.forEach((row, i) => {
+                if(!row.trim()) return;
+                const p = row.split('|');
+                pContainer.innerHTML += `
+                    <div class="leaderboard-item">
+                        <div class="rank">#0${i+1}</div>
+                        <div class="username">@${p[0]}</div>
+                        <div class="score">${p[1]}</div>
+                    </div>
+                `;
+            });
+        }
+
+        function drawTournament() {
+            const raw = localStorage.getItem('tournamentBracket').split('\n');
+            const container = document.getElementById('bracketContainer');
+            container.innerHTML = '';
+
+            let currentStage = "";
+            let htmlStr = "";
+
+            raw.forEach(row => {
+                if(!row.trim()) return;
+                const [stage, teams, winner] = row.split('|');
+
+                if (stage === "WINNER") {
+                    htmlStr += `
+                        <div class="reward-box">
+                            <div style="font-size:13px; text-transform:uppercase; font-weight:800; letter-spacing:1px; color:var(--text-light); margin-bottom:5px;">Nagroda Główna</div>
+                            <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:15px;">Wygrany otrzymuje <span style="color:var(--accent-color)">5 pkt</span> do głównej topki punktowej</div>
+                            <div style="font-size:12px; text-transform:uppercase; color:var(--text-color)">Aktualny Zwycięzca Turnieju:</div>
+                            <div style="font-size:20px; font-weight:900; color:var(--accent-color); margin-top:5px;">${winner}</div>
+                        </div>`;
+                    return;
+                }
+
+                if (stage !== currentStage) {
+                    if (currentStage !== "") htmlStr += `</div>`; // zamknij poprzednią sekcję
+                    currentStage = stage;
+                    htmlStr += `<div class="tournament-stage"><div class="stage-title">---------- ${stage} ----------</div>`;
+                }
+
+                const winnerClass = (winner === "???" || !winner) ? "match-winner tbd" : "match-winner";
+                htmlStr += `
+                    <div class="match-row">
+                        <div class="match-teams">${teams}</div>
+                        <div class="${winnerClass}">Wygrał: ${winner}</div>
+                    </div>
+                `;
+            });
+
+            if (currentStage !== "") htmlStr += `</div>`;
+            container.innerHTML = htmlStr;
+        }
+
+        // --- ADMIN CONTROLS ---
+        function openAdminModal() { document.getElementById('adminModal').style.display = 'block'; }
+        function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+
+        function authAdmin() {
+            if(document.getElementById('adminPasswordInput').value === "MKMKCS2") {
+                document.getElementById('adminLoginBlock').style.display = 'none';
+                document.getElementById('adminPanelControls').style.display = 'block';
+                
+                document.getElementById('rawFaceitText').value = localStorage.getItem('topFaceit');
+                document.getElementById('rawPktText').value = localStorage.getItem('topPkt');
+                document.getElementById('rawBracketText').value = localStorage.getItem('tournamentBracket');
+            } else {
+                alert('Błędne Hasło!');
+            }
+        }
+
+        function saveAdminData() {
+            localStorage.setItem('topFaceit', document.getElementById('rawFaceitText').value);
+            localStorage.setItem('topPkt', document.getElementById('rawPktText').value);
+            localStorage.setItem('tournamentBracket', document.getElementById('rawBracketText').value);
+            
+            drawLeaderboards();
+            drawTournament();
+            closeAdminModal();
+            alert('Baza danych MKMK zaktualizowana pomyślnie.');
+        }
+
+        // APP INIT
+        updateAuthBar();
+        drawClips();
+        drawLeaderboards();
+        drawTournament();
+    </script>
 </body>
 </html>
