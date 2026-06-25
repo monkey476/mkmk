@@ -108,8 +108,10 @@
             text-transform: uppercase; transition: all var(--transition-speed) ease;
         }
         .btn:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
-        .btn-danger { background: #ff3b30; color: white; padding: 6px 12px; font-size: 11px; }
+        .btn-danger { background: #ff3b30; color: white; padding: 6px 12px; font-size: 11px; border-radius: 4px; border:none; cursor:pointer; font-weight: bold;}
         .btn-danger:hover { background: #d32f2f; box-shadow: none; color: white; }
+        .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor:pointer; font-weight: bold;}
+        .btn-secondary:hover { background: #30363d; color: #fff; }
 
         /* SIDEBAR USTAWIEŃ */
         .settings-sidebar {
@@ -214,7 +216,7 @@
         .clip-meta { font-size: 13px; color: var(--text-color); margin-bottom: 15px; }
         .clip-link { color: var(--accent-color); text-decoration: none; font-weight: bold; }
 
-        /* MODALE STRUKTURALNE */
+        /* MODALE */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px);
@@ -235,14 +237,12 @@
         .modal-close-btn { font-size: 20px; cursor: pointer; color: var(--text-color); transition: color var(--transition-speed); user-select: none; }
         .modal-close-btn:hover { color: #ff3b30; }
 
-        /* AUTORYZACJA SUB-TABS */
         .auth-subnav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
         .auth-subnav button { background: transparent; border: none; color: var(--text-color); font-weight: bold; cursor: pointer; padding: 5px 10px; font-size: 14px; transition: color 0.2s; }
         .auth-subnav button.active { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); }
 
         .modal-form-group { display: flex; flex-direction: column; gap: 15px; margin-bottom: 15px; }
 
-        /* CAPTCHA STYLING */
         .captcha-box { display: flex; align-items: center; gap: 10px; background: var(--bg-color); border: 1px solid var(--border-color); padding: 10px; border-radius: 6px; }
         .captcha-display {
             background: repeating-linear-gradient(45deg, #1f242c, #1f242c 10px, #161b22 10px, #161b22 20px);
@@ -253,24 +253,28 @@
         .captcha-refresh { font-size: 18px; cursor: pointer; color: var(--text-color); user-select: none; transition: color var(--transition-speed); }
         .captcha-refresh:hover { color: var(--accent-color); }
 
-        /* ADMIN SPECIFIC */
-        #adminModal { width: 700px; max-height: 85vh; overflow-y: auto; }
+        /* ZAAWANSOWANY PANEL ADMINISTRATORA (POTĘŻNY EDYTOR) */
+        #adminModal { width: 850px; max-height: 90vh; overflow-y: auto; }
+        .admin-modal textarea {
+            width: 100%; height: 180px; background: var(--bg-color); color: var(--text-light);
+            border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 15px;
+            font-family: 'Consolas', 'Courier New', monospace; box-sizing: border-box; padding: 15px; outline: none;
+            font-size: 14px; line-height: 1.5; resize: vertical;
+        }
+        .admin-sec-title { color: var(--accent-color); font-size: 14px; text-transform: uppercase; margin: 30px 0 15px 0; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; letter-spacing: 1px;}
+        .admin-grid-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 15px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .admin-table-list { width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 13px; margin-bottom: 20px; }
+        .admin-table-list th { color: var(--text-color); padding: 10px; border-bottom: 2px solid var(--border-color); text-align: left; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+        .admin-table-list td { padding: 12px 10px; border-bottom: 1px solid var(--border-color); color: var(--text-light); }
+        .admin-table-list tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
         .admin-trigger {
             position: fixed; bottom: 15px; left: 15px; background: var(--panel-bg); color: var(--text-color);
-            padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 11px; z-index: 950; border: 1px solid var(--border-color);
-            transition: all var(--transition-speed);
+            padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; z-index: 950; border: 1px solid var(--border-color);
+            transition: all var(--transition-speed); font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
-        .admin-trigger:hover { color: var(--accent-color); border-color: var(--accent-color); }
-        .admin-modal textarea {
-            width: 100%; height: 80px; background: var(--bg-color); color: var(--text-light);
-            border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 12px;
-            font-family: monospace; box-sizing: border-box; padding: 8px; outline: none;
-        }
-        .admin-sec-title { color: var(--accent-color); font-size: 13px; text-transform: uppercase; margin: 20px 0 10px 0; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;}
-        .admin-grid-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
-        .admin-table-list { width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 12px; }
-        .admin-table-list th { color: var(--text-color); padding: 6px; border-bottom: 1px solid var(--border-color); text-align: left; }
-        .admin-table-list td { padding: 8px 6px; border-bottom: 1px solid var(--border-color); color: var(--text-light); }
+        .admin-trigger:hover { color: var(--accent-color); border-color: var(--accent-color); box-shadow: 0 0 10px var(--accent-glow); }
+        .adm-actions-cell { display: flex; gap: 8px; }
     </style>
 </head>
 <body>
@@ -318,7 +322,7 @@
     <!-- TŁO MODALNE -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeAllModals()"></div>
 
-    <!-- MODAL: ZAAWANSOWANE LOGOWANIE / REJESTRACJA + CAPTCHA -->
+    <!-- MODAL: LOGOWANIE / REJESTRACJA -->
     <div class="custom-modal" id="loginModal">
         <div class="modal-header">
             <h3 id="authModalTitle">Panel Gracza</h3>
@@ -334,7 +338,6 @@
             <input type="text" id="uNick" class="auth-input" placeholder="Nazwa użytkownika">
             <input type="password" id="uPass" class="auth-input" placeholder="Hasło dostępu">
             
-            <!-- CAPTCHA -->
             <div class="captcha-box">
                 <div class="captcha-display" id="captchaValue">XXXX</div>
                 <div class="captcha-refresh" onclick="generateCaptcha()">🔄</div>
@@ -345,51 +348,92 @@
         <button class="btn" id="authSubmitBtn" style="width:100%; padding: 12px;" onclick="handleAuthSubmit()">Wykonaj operację</button>
     </div>
 
-    <!-- MODAL: PANEL ADMINISTRATORA -->
+    <!-- MODAL: POTĘŻNY PANEL ADMINISTRATORA -->
     <div class="custom-modal" id="adminModal">
         <div class="modal-header">
-            <h3 style="font-size:14px; color:var(--text-light)">MKMK Advanced Command Center</h3>
+            <h3 style="font-size:15px; color:var(--text-light); font-weight: 900; letter-spacing: 1px;">⚙️ Kwatera Główna MKMK Admin Command Center</h3>
             <span class="modal-close-btn" onclick="closeAdminModal()">✕</span>
         </div>
         
-        <div id="adminLoginBlock">
-            <input type="password" id="adminPasswordInput" class="auth-input" placeholder="Hasło struktury" style="width:100%; margin-bottom:10px; box-sizing:border-box;">
-            <button class="btn" style="width:100%;" onclick="authAdmin()">Autoryzuj wejście</button>
+        <div id="adminLoginBlock" style="padding: 10px 0;">
+            <input type="password" id="adminPasswordInput" class="auth-input" placeholder="Wpisz hasło administratora (MKMKCS2)" style="width:100%; margin-bottom:15px; box-sizing:border-box;">
+            <button class="btn" style="width:100%; padding: 12px;" onclick="authAdmin()">Autoryzuj wejście</button>
         </div>
 
         <div id="adminPanelControls" style="display:none;">
-            <div class="admin-sec-title">Dodaj / Aktualizuj Gracza (Główna Topka)</div>
-            <div class="admin-grid-inputs">
-                <input type="text" id="admNick" class="auth-input" placeholder="Nick gracza">
-                <input type="number" id="admPremier" class="auth-input" placeholder="Premier">
-                <input type="text" id="admKd" class="auth-input" placeholder="K/D">
-                <input type="text" id="admWr" class="auth-input" placeholder="Win Rate">
-                <input type="number" id="admMecze" class="auth-input" placeholder="Mecze">
-                <input type="number" id="admAdr" class="auth-input" placeholder="ADR">
-            </div>
-            <button class="btn" style="width:100%; margin-bottom:15px;" onclick="addPlayerToMainTop()">Zapisz Gracza w Tabeli</button>
-
-            <div class="admin-sec-title">Usuwanie Klipów Społeczności</div>
+            
+            <!-- 1. GŁÓWNA TOPKA PREMIER -->
+            <div class="admin-sec-title">📊 Zarządzanie Główną Topką (Premier)</div>
+            
             <table class="admin-table-list">
-                <thead><tr><th>Nazwa klipu</th><th>Autor</th><th>Akcja</th></tr></thead>
-                <tbody id="admClipsList"></tbody>
+                <thead>
+                    <tr>
+                        <th>Nick</th>
+                        <th>Premier</th>
+                        <th>K/D</th>
+                        <th>WinRate</th>
+                        <th>Mecze</th>
+                        <th>ADR</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody id="admPremierPlayersList"></tbody>
             </table>
 
-            <div class="admin-sec-title">Zarządzanie Kontami & Logi Założeń</div>
+            <div style="font-size: 12px; margin-bottom: 8px; font-weight: bold; color: var(--text-light);">Formularz zapisu / edycji gracza:</div>
+            <div class="admin-grid-inputs">
+                <input type="text" id="admNick" class="auth-input" placeholder="Nick gracza">
+                <input type="number" id="admPremier" class="auth-input" placeholder="Punkty Premier (np. 4500)">
+                <input type="text" id="admKd" class="auth-input" placeholder="K/D (np. 1.05)">
+                <input type="text" id="admWr" class="auth-input" placeholder="Win Rate (np. 54%)">
+                <input type="number" id="admMecze" class="auth-input" placeholder="Ilość meczów">
+                <input type="number" id="admAdr" class="auth-input" placeholder="Średni ADR">
+            </div>
+            <button class="btn" style="width:100%; background: var(--text-light); color: var(--bg-color); margin-bottom: 25px;" onclick="addPlayerToMainTop()">Zapisz / Aktualizuj Gracza w Tabeli</button>
+
+            <!-- 2. POBOCZNE TOPKI TEKSTOWE -->
+            <div class="admin-sec-title">🏆 Edycja Tobeł Pobocznych (Duże Pola Tekstowe)</div>
+            
+            <label style="display:block; font-size:12px; font-weight:700; margin-bottom:6px; color:var(--text-light);">Topka FaceIT (Wzór: Nick|Ranga/Level|DodatkowyOpis)</label>
+            <textarea id="rawFaceitText" placeholder="Gracz1|Level 10|(2500 ELO)&#10;Gracz2|Level 5|(1250 ELO)"></textarea>
+
+            <label style="display:block; font-size:12px; font-weight:700; margin-bottom:6px; color:var(--text-light);">Topka PKT Eventowych (Wzór: Nick|Ilość Punktów)</label>
+            <textarea id="rawPktText" placeholder="Gracz1|15 pkt&#10;Gracz2|10 pkt"></textarea>
+
+            <label style="display:block; font-size:12px; font-weight:700; margin-bottom:6px; color:var(--text-light);">Drabinka turniejowa (Wzór: Runda/Etap|Mecz/Zestawienie|Kto wygrał)</label>
+            <textarea id="rawBracketText" placeholder="Ćwierćfinał|GraczA vs GraczB|GraczA&#10;Półfinał|GraczA vs GraczC|W toku"></textarea>
+
+            <button class="btn" style="width:100%; background: var(--accent-color); color: #000; margin-bottom: 25px; font-size: 14px;" onclick="saveAdminData()">💾 Zapisz Drabinki i Topki Poboczne</button>
+
+            <!-- 3. ZARZĄDZANIE KONTAMI UŻYTKOWNIKÓW -->
+            <div class="admin-sec-title">👥 Zarządzanie Kontami & Bezpieczeństwo</div>
             <table class="admin-table-list">
-                <thead><tr><th>Użytkownik</th><th>Utworzono (Log)</th><th>Opcje</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>Użytkownik</th>
+                        <th>Data założenia konta</th>
+                        <th>Dostępne akcje panelu</th>
+                    </tr>
+                </thead>
                 <tbody id="admUsersList"></tbody>
             </table>
 
-            <div class="admin-sec-title">Modyfikacja Drabinek i Pobocznych Tobeł</div>
-            <textarea id="rawBracketText" placeholder="Drabinka turnieju"></textarea>
-            <textarea id="rawFaceitText" style="height:50px;" placeholder="FaceIT topka"></textarea>
-            <textarea id="rawPktText" style="height:50px;" placeholder="Punkty topka"></textarea>
-
-            <button class="btn" style="width:100%; background:var(--accent-color); color:#000;" onclick="saveAdminData()">Zapisz Wszystko</button>
+            <!-- 4. USUWANIE KLIPÓW SPOŁECZNOŚCI -->
+            <div class="admin-sec-title">🎬 Moderacja Klipów Wrzucanych przez Graczy</div>
+            <table class="admin-table-list">
+                <thead>
+                    <tr>
+                        <th>Nazwa klipu</th>
+                        <th>Autor wpisu</th>
+                        <th>Akcja</th>
+                    </tr>
+                </thead>
+                <tbody id="admClipsList"></tbody>
+            </table>
         </div>
     </div>
 
+    <!-- PRZYCISK TRIGGER PANELU -->
     <div class="admin-trigger" onclick="openAdminModal()">🔒 Admin Panel</div>
 
     <!-- ZAWARTOŚĆ STRONY -->
@@ -481,7 +525,7 @@
         if(!localStorage.getItem('userAccounts')) localStorage.setItem('userAccounts', JSON.stringify(defAccounts));
 
         let streamerModeActive = false;
-        let currentAuthMode = 'login'; // 'login' lub 'register'
+        let currentAuthMode = 'login';
         let currentCaptchaValue = '';
 
         function switchTab(tabId) {
@@ -541,7 +585,6 @@
         }
         function closeAllModals() { closeLoginModal(); closeAdminModal(); }
 
-        // --- PRZEŁĄCZANIE TRYBÓW W MODALU ---
         function setAuthMode(mode) {
             currentAuthMode = mode;
             generateCaptcha();
@@ -556,7 +599,6 @@
             }
         }
 
-        // --- PROCES WERYFIKACJI I WYSYŁANIA FORMULARZA ---
         function handleAuthSubmit() {
             const n = document.getElementById('uNick').value.trim();
             const p = document.getElementById('uPass').value;
@@ -573,20 +615,12 @@
             let existingAcc = accounts.find(a => a.username.toLowerCase() === n.toLowerCase());
 
             if(currentAuthMode === 'login') {
-                // LOGOWANIE
-                if(!existingAcc) {
-                    return alert('Konto o tej nazwie nie istnieje! Przełącz na rejestrację.');
-                }
-                if(existingAcc.pass !== p) {
-                    return alert('Błędne hasło dla tego użytkownika!');
-                }
+                if(!existingAcc) return alert('Konto o tej nazwie nie istnieje!');
+                if(existingAcc.pass !== p) return alert('Błędne hasło!');
                 localStorage.setItem('activeUser', existingAcc.username);
                 alert('Zalogowano pomyślnie!');
             } else {
-                // REJESTRACJA
-                if(existingAcc) {
-                    return alert('Ta nazwa użytkownika jest już zajęta!');
-                }
+                if(existingAcc) return alert('Ta nazwa użytkownika jest już zajęta!');
                 const newAcc = {
                     username: n,
                     created: new Date().toISOString().replace('T', ' ').substring(0, 16),
@@ -595,7 +629,7 @@
                 accounts.push(newAcc);
                 localStorage.setItem('userAccounts', JSON.stringify(accounts));
                 localStorage.setItem('activeUser', n);
-                alert('Konto zostało pomyślnie zarejestrowane i zalogowane!');
+                alert('Konto zostało zarejestrowane i zalogowane!');
             }
 
             closeLoginModal();
@@ -721,14 +755,14 @@
             const fContainer = document.getElementById('faceitListContainer'); fContainer.innerHTML = '';
             fRaw.forEach((row, i) => {
                 if(!row.trim()) return; const p = row.split('|');
-                fContainer.innerHTML += `<div class="leaderboard-item"><div class="rank">#0${i+1}</div><div class="username">${displayUsername(p[0])}</div><div class="score">${p[1]}</div></div>`;
+                fContainer.innerHTML += `<div class="leaderboard-item"><div class="rank">#0${i+1}</div><div class="username">${displayUsername(p[0])}</div><div class="score">${p[1] || 'Brak'}</div></div>`;
             });
 
             const pRaw = localStorage.getItem('topPkt').split('\n');
             const pContainer = document.getElementById('pktListContainer'); pContainer.innerHTML = '';
             pRaw.forEach((row, i) => {
                 if(!row.trim()) return; const p = row.split('|');
-                pContainer.innerHTML += `<div class="leaderboard-item"><div class="rank">#0${i+1}</div><div class="username">${displayUsername(p[0])}</div><div class="score">${p[1]}</div></div>`;
+                pContainer.innerHTML += `<div class="leaderboard-item"><div class="rank">#0${i+1}</div><div class="username">${displayUsername(p[0])}</div><div class="score">${p[1] || '0 pkt'}</div></div>`;
             });
         }
 
@@ -743,31 +777,98 @@
                     currentStage = stage;
                     htmlStr += `<div class="tournament-stage"><div class="stage-title">${stage}</div>`;
                 }
-                htmlStr += `<div class="match-row"><div class="match-teams">${teams}</div><div class="match-winner">Wygrał: ${winner}</div></div>`;
+                htmlStr += `<div class="match-row"><div class="match-teams">${teams}</div><div class="match-winner">Wygrał: ${winner || '???'}</div></div>`;
             });
             container.innerHTML = htmlStr;
         }
 
-        // --- ADMIN CONTROLS ---
+        // --- INTERFEJS I LOGIKA PANELU ADMINA ---
         function authAdmin() {
             if(document.getElementById('adminPasswordInput').value === "MKMKCS2") {
                 document.getElementById('adminLoginBlock').style.display = 'none';
                 document.getElementById('adminPanelControls').style.display = 'block';
+                
                 document.getElementById('rawFaceitText').value = localStorage.getItem('topFaceit');
                 document.getElementById('rawPktText').value = localStorage.getItem('topPkt');
                 document.getElementById('rawBracketText').value = localStorage.getItem('tournamentBracket');
+                
                 refreshAdminLists();
-            } else { alert('Błędne Hasło!'); }
+            } else { alert('Błędne Hasło Administratora!'); }
         }
 
         function refreshAdminLists() {
-            const clips = JSON.parse(localStorage.getItem('userClips'));
-            const cTbody = document.getElementById('admClipsList'); cTbody.innerHTML = '';
-            clips.forEach((c, idx) => { cTbody.innerHTML += `<tr><td>${c.name}</td><td>${c.author}</td><td><button class="btn btn-danger" onclick="adminDeleteClip(${idx})">Usuń</button></td></tr>`; });
+            // 1. Lista graczy topki głównej (Premier) do szybkiej edycji/usunięcia
+            const players = JSON.parse(localStorage.getItem('mainPremierTop'));
+            players.sort((a,b) => b.premier - a.premier);
+            const pTbody = document.getElementById('admPremierPlayersList');
+            pTbody.innerHTML = '';
+            players.forEach((p, idx) => {
+                pTbody.innerHTML += `
+                    <tr>
+                        <td><strong>${p.nick}</strong></td>
+                        <td>${p.premier}</td>
+                        <td>${p.kd}</td>
+                        <td>${p.wr}</td>
+                        <td>${p.mecze}</td>
+                        <td>${p.adr || 0}</td>
+                        <td class="adm-actions-cell">
+                            <button class="btn-secondary" onclick="adminLoadPlayerToForm(${idx})">Edytuj</button>
+                            <button class="btn-danger" onclick="adminDeletePlayer(${idx})">Usuń</button>
+                        </td>
+                    </tr>
+                `;
+            });
 
+            // 2. Lista kont graczy + opcja usuwania
             const users = JSON.parse(localStorage.getItem('userAccounts'));
-            const uTbody = document.getElementById('admUsersList'); uTbody.innerHTML = '';
-            users.forEach(u => { uTbody.innerHTML += `<tr><td><strong>${u.username}</strong></td><td>${u.created}</td><td><button class="btn" onclick="adminResetPassword('${u.username}')">Reset Hasła</button></td></tr>`; });
+            const uTbody = document.getElementById('admUsersList'); 
+            uTbody.innerHTML = '';
+            users.forEach((u, idx) => { 
+                uTbody.innerHTML += `
+                    <tr>
+                        <td><strong>${u.username}</strong></td>
+                        <td>${u.created}</td>
+                        <td class="adm-actions-cell">
+                            <button class="btn-secondary" onclick="adminResetPassword('${u.username}')">Reset Hasła</button>
+                            <button class="btn-danger" onclick="adminDeleteAccount(${idx})">Usuń Konto</button>
+                        </td>
+                    </tr>
+                `; 
+            });
+
+            // 3. Lista Klipów do moderacji
+            const clips = JSON.parse(localStorage.getItem('userClips'));
+            const cTbody = document.getElementById('admClipsList'); 
+            cTbody.innerHTML = '';
+            clips.forEach((c, idx) => { 
+                cTbody.innerHTML += `<tr><td>${c.name}</td><td>${c.author}</td><td><button class="btn btn-danger" onclick="adminDeleteClip(${idx})">Usuń</button></td></tr>`; 
+            });
+        }
+
+        // Akcje na głównej topce
+        function adminLoadPlayerToForm(index) {
+            const players = JSON.parse(localStorage.getItem('mainPremierTop'));
+            players.sort((a,b) => b.premier - a.premier);
+            const p = players[index];
+            
+            document.getElementById('admNick').value = p.nick;
+            document.getElementById('admPremier').value = p.premier;
+            document.getElementById('admKd').value = p.kd;
+            document.getElementById('admWr').value = p.wr;
+            document.getElementById('admMecze').value = p.mecze;
+            document.getElementById('admAdr').value = p.adr || 0;
+            
+            alert('Dane gracza ' + p.nick + ' zostały załadowane do formularza poniżej. Popraw dane i kliknij Zapisz.');
+        }
+
+        function adminDeletePlayer(index) {
+            if(!confirm('Czy na pewno chcesz usunąć tego gracza z rankingu Premier?')) return;
+            let players = JSON.parse(localStorage.getItem('mainPremierTop'));
+            players.sort((a,b) => b.premier - a.premier);
+            players.splice(index, 1);
+            localStorage.setItem('mainPremierTop', JSON.stringify(players));
+            refreshAdminLists();
+            drawMainPremierTop();
         }
 
         function addPlayerToMainTop() {
@@ -778,20 +879,46 @@
             const mecze = parseInt(document.getElementById('admMecze').value) || 0;
             const adr = parseInt(document.getElementById('admAdr').value) || 0;
 
-            if(!nick || isNaN(premier)) return alert('Wprowadź dane podstawowe!');
+            if(!nick || isNaN(premier)) return alert('Podaj przynajmniej Nick oraz Punkty Premier!');
+            
             let players = JSON.parse(localStorage.getItem('mainPremierTop'));
+            // Usunięcie jeśli już istniał dubel
             players = players.filter(p => p.nick.toLowerCase() !== nick.toLowerCase());
+            
             players.push({ nick, premier, kd, wr, mecze, adr });
             localStorage.setItem('mainPremierTop', JSON.stringify(players));
+            
+            // Czyszczenie pól formularza
+            document.getElementById('admNick').value = '';
+            document.getElementById('admPremier').value = '';
+            document.getElementById('admKd').value = '';
+            document.getElementById('admWr').value = '';
+            document.getElementById('admMecze').value = '';
+            document.getElementById('admAdr').value = '';
+            
+            refreshAdminLists(); 
             drawMainPremierTop();
-            alert('Zaktualizowano gracza.');
+            alert('Pomyślnie zaktualizowano bazę danych topki Premier.');
         }
 
-        function adminDeleteClip(index) {
-            let clips = JSON.parse(localStorage.getItem('userClips'));
-            clips.splice(index, 1);
-            localStorage.setItem('userClips', JSON.stringify(clips));
-            refreshAdminLists(); drawClips();
+        // Akcje na kontach użytkowników
+        function adminDeleteAccount(index) {
+            let users = JSON.parse(localStorage.getItem('userAccounts'));
+            const targetUser = users[index].username;
+            
+            if(!confirm(`Czy na pewno chcesz permanentnie usunąć konto gracza: ${targetUser}?`)) return;
+            
+            users.splice(index, 1);
+            localStorage.setItem('userAccounts', JSON.stringify(users));
+            
+            // Jeśli usunięto właśnie zalogowanego użytkownika - wyloguj go automatycznie
+            if(localStorage.getItem('activeUser') === targetUser) {
+                localStorage.removeItem('activeUser');
+                updateAuthBar();
+            }
+            
+            refreshAdminLists();
+            alert('Konto użytkownika zostało bezpowrotnie usunięte.');
         }
 
         function adminResetPassword(username) {
@@ -799,14 +926,26 @@
             if(!np) return;
             let users = JSON.parse(localStorage.getItem('userAccounts'));
             let u = users.find(account => account.username === username);
-            if(u) { u.pass = np; localStorage.setItem('userAccounts', JSON.stringify(users)); alert('Zmieniono.'); }
+            if(u) { u.pass = np; localStorage.setItem('userAccounts', JSON.stringify(users)); alert('Hasło zostało zmienione.'); }
         }
 
+        // Akcje na klipach
+        function adminDeleteClip(index) {
+            let clips = JSON.parse(localStorage.getItem('userClips'));
+            clips.splice(index, 1);
+            localStorage.setItem('userClips', JSON.stringify(clips));
+            refreshAdminLists(); drawClips();
+        }
+
+        // Zapis dużych pól tekstowych
         function saveAdminData() {
             localStorage.setItem('topFaceit', document.getElementById('rawFaceitText').value);
             localStorage.setItem('topPkt', document.getElementById('rawPktText').value);
             localStorage.setItem('tournamentBracket', document.getElementById('rawBracketText').value);
-            drawSubLeaderboards(); drawTournament(); closeAdminModal();
+            drawSubLeaderboards(); 
+            drawTournament(); 
+            closeAdminModal();
+            alert('Wszystkie zmiany w tabelach pobocznych zostały pomyślnie zapisane!');
         }
 
         // --- INIT ---
