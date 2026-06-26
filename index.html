@@ -411,7 +411,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, set, onValue, push, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAe6_ODkyqxC4FmMvP4rdY5-lLKUyuv7UY",
@@ -448,7 +448,10 @@
                 state.userAccounts = [];
                 if (data.userAccounts) {
                     Object.keys(data.userAccounts).forEach(key => {
-                        state.userAccounts.push(data.userAccounts[key]);
+                        const userObj = data.userAccounts[key];
+                        if (userObj) {
+                            state.userAccounts.push(userObj);
+                        }
                     });
                 }
                 
@@ -537,24 +540,35 @@
         document.getElementById('subtabLogin').onclick = () => setAuthMode('login');
         document.getElementById('subtabRegister').onclick = () => setAuthMode('register');
 
-        document.getElementById('authSubmitBtn').onclick = () => {
+        document.getElementById('authSubmitBtn').onclick = async () => {
             const n = document.getElementById('uNick').value.trim(), p = document.getElementById('uPass').value, c = document.getElementById('uCaptchaInput').value.trim();
             if(!n || !p) return alert('Uzupełnij pola!');
             if(c.toUpperCase() !== captcha) return alert('Błędna CAPTCHA!');
 
+            const snapshot = await get(ref(db, 'mkmk_data/userAccounts'));
+            const currentAccounts = [];
+            if(snapshot.exists()) {
+                const rawData = snapshot.val();
+                Object.keys(rawData).forEach(k => {
+                    if(rawData[k]) currentAccounts.push(rawData[k]);
+                });
+            }
+
             if(authMode==='login') {
-                let exist = state.userAccounts.find(a => a && a.username && a.username.toLowerCase() === n.toLowerCase());
-                if(!exist || exist.pass !== p) return alert('Błędna nazwa użytkownika lub hasło!');
+                let exist = currentAccounts.find(a => a && a.username && a.username.toLowerCase() === n.toLowerCase());
+                if(!exist || String(exist.pass) !== String(p)) {
+                    return alert('Błędna nazwa użytkownika lub hasło!');
+                }
                 localStorage.setItem('activeUser', exist.username);
                 alert(`Witaj ponownie, ${exist.username}!`);
             } else {
-                let exist = state.userAccounts.find(a => a && a.username && a.username.toLowerCase() === n.toLowerCase());
+                let exist = currentAccounts.find(a => a && a.username && a.username.toLowerCase() === n.toLowerCase());
                 if(exist) return alert('Ta nazwa użytkownika jest już zajęta!');
                 
                 const newAccRef = push(ref(db, 'mkmk_data/userAccounts'));
-                const newUserData = {username: n, created: new Date().toISOString().split('T')[0], pass: p};
+                const newUserData = {username: n, created: new Date().toISOString().split('T')[0], pass: String(p)};
                 
-                set(newAccRef, newUserData);
+                await set(newAccRef, newUserData);
                 localStorage.setItem('activeUser', n);
                 alert(`Konto ${n} zostało pomyślnie utworzone!`);
             }
@@ -594,7 +608,7 @@
             state.tournamentBracket.split('\n').forEach(row=>{ if(!row.trim())return; const pts=row.split('|'); bCont.innerHTML+=`<div class="tournament-stage"><div class="stage-title">${pts[0]}</div><div class="match-row"><div>${pts[1]}</div><div class="match-winner">${pts[2]}</div></div></div>`; });
 
             const cCont = document.getElementById('clipsContainer'); cCont.innerHTML='';
-            state.userClips.forEach(c=>{ cCont.innerHTML+=`<div class="clip-card"><b style="color:#fff; font-size:16px;">${c.name}</b><small style="color:var(--text-color)">Wysłane przez: ${mask(c.author)}</small><a href="${c.url}" target="_blank" class="btn" style="padding:8px 12px; text-align:center; margin-top:10px; font-size:11px; background:var(--accent-color)">Oglążaj Akcję</a></div>`; });
+            state.userClips.forEach(c=>{ cCont.innerHTML+=`<div class="clip-card"><b style="color:#fff; font-size:16px;">${c.name}</b><small style="color:var(--text-color)">Wysłane przez: ${mask(c.author)}</small><a href="${c.url}" target="_blank" class="btn" style="padding:8px 12px; text-align:center; margin-top:10px; font-size:11px; background:var(--accent-color)">Oglądaj Akcję</a></div>`; });
         }
 
         document.getElementById('adminAuthSubmit').onclick = () => {
