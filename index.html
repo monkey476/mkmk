@@ -1,674 +1,272 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MKMK - Premium Esports Platform</title>
-    <style>
-        :root {
-            --bg-color: #030609; 
-            --panel-bg: rgba(10, 17, 26, 0.75); 
-            --panel-card: rgba(18, 30, 43, 0.5);
-            --accent-color: #00ff66; 
-            --accent-glow: rgba(0, 255, 102, 0.35);
-            --text-color: #94a3b8; 
-            --text-light: #f8fafc; 
-            --border-color: rgba(0, 255, 102, 0.12);
-            --gold: #ffd700; --silver: #e2e8f0; --bronze: #b45309; 
-            --transition-speed: 0.4s;
-        }
-        body.theme-gray {
-            --bg-color: #111827; --panel-bg: rgba(31, 41, 55, 0.8); --panel-card: rgba(55, 65, 81, 0.5); --border-color: rgba(0, 255, 102, 0.2);
-        }
-        body.theme-light {
-            --bg-color: #f1f5f9; --panel-bg: rgba(255, 255, 255, 0.85); --panel-card: rgba(241, 245, 249, 0.9); --border-color: rgba(0, 170, 68, 0.2); --text-color: #475569; --text-light: #0f172a; --accent-color: #00aa44; --accent-glow: rgba(0, 170, 68, 0.2);
-        }
-        
-        body { 
-            font-family: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            margin: 0; padding: 0; 
-            min-height: 100vh; 
-            background-image: radial-gradient(circle at 50% 0%, rgba(0, 255, 102, 0.07) 0%, transparent 50%);
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mkmk</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-2: #273449;
+      --primary: #14b8a6;
+      --primary-hover: #0d9488;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: #334155;
+      --radius: 14px;
+    }
 
-        /* Piękny, szklany Header */
-        header { 
-            background: var(--panel-bg); 
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border-color); 
-            padding: 0 40px; height: 85px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            position: sticky; top: 0; z-index: 900;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-        }
-        .header-left, .header-right { display: flex; align-items: center; gap: 30px; }
-        
-        .logo { 
-            font-size: 28px; font-weight: 900; 
-            color: var(--text-light); letter-spacing: 6px; 
-            text-transform: uppercase;
-            position: relative;
-            background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px var(--accent-glow);
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .settings-icon { font-size: 24px; cursor: pointer; transition: transform 0.5s ease; user-select: none; }
-        .settings-icon:hover { color: var(--accent-color); transform: rotate(180deg); filter: drop-shadow(0 0 8px var(--accent-color)); }
-        
-        /* Przeprojektowane Przyciski Nawigacji */
-        .tabs-nav { display: flex; gap: 8px; background: rgba(0,0,0,0.3); padding: 5px; border-radius: 14px; border: 1px solid var(--border-color); }
-        .tab-btn { 
-            background: transparent; border: none; color: var(--text-color); 
-            padding: 12px 26px; font-size: 13px; font-weight: 700; 
-            text-transform: uppercase; cursor: pointer; border-radius: 10px; 
-            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1); 
-            letter-spacing: 1px;
-        }
-        .tab-btn.active, .tab-btn:hover { 
-            color: #000; background: var(--accent-color); 
-            box-shadow: 0 0 20px var(--accent-glow);
-            transform: translateY(-1px);
-        }
-        
-        .auth-zone { display: flex; align-items: center; gap: 15px; border-left: 2px solid var(--border-color); padding-left: 25px; }
-        
-        .auth-input, .settings-select { 
-            background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); 
-            color: var(--text-light); padding: 14px 16px; border-radius: 10px; 
-            font-size: 14px; outline: none; width: 100%; box-sizing: border-box;
-            transition: all 0.3s;
-        }
-        .auth-input:focus, .settings-select:focus { 
-            border-color: var(--accent-color); 
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
-        }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px 16px;
+      line-height: 1.5;
+    }
 
-        /* Futurystyczne Przyciski */
-        .btn { 
-            background: var(--text-light); color: #000; border: none; 
-            padding: 12px 24px; border-radius: 10px; cursor: pointer; 
-            font-weight: 700; text-transform: uppercase; font-size: 13px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 0.5px;
-        }
-        .btn:hover { 
-            background: var(--accent-color); color: #000; 
-            box-shadow: 0 0 25px var(--accent-glow);
-            transform: translateY(-2px);
-        }
-        .btn-danger { background: #ef4444; color: white; padding: 8px 16px; font-size: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
-        .btn-danger:hover { background: #dc2626; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
-        .btn-secondary { background: rgba(255,255,255,0.05); color: var(--text-light); border: 1px solid var(--border-color); padding: 8px 16px; font-size: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        .btn-secondary:hover { background: rgba(0, 255, 102, 0.1); border-color: var(--accent-color); }
+    .container {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-        /* Sidebar Ustawień */
-        .settings-sidebar { 
-            position: fixed; top: 0; left: -350px; width: 350px; height: 100%; 
-            background: rgba(10, 16, 26, 0.95); backdrop-filter: blur(20px);
-            border-right: 1px solid var(--border-color); z-index: 999; 
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); padding: 40px 30px; box-sizing: border-box; 
-        }
-        .settings-sidebar.open { transform: translateX(350px); }
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .sidebar-header h3 { margin: 0; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px; }
-        .close-sidebar { font-size: 22px; cursor: pointer; color: var(--text-color); }
-        .close-sidebar:hover { color: #ef4444; }
-        .setting-item { margin-bottom: 25px; background: var(--panel-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); }
-        .setting-item label { display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 10px; color: var(--accent-color); font-weight: 700; letter-spacing: 1px; }
+    header { text-align: center; padding: 8px 0; }
 
-        /* Kontenery i Panele */
-        .container { max-width: 1200px; margin: 50px auto; padding: 0 25px; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: smoothUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        @keyframes smoothUp { 
-            from { opacity: 0; transform: translateY(20px); filter: blur(5px); } 
-            to { opacity: 1; transform: translateY(0); filter: blur(0); } 
-        }
+    header h1 {
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--primary), #5eead4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-        .panel { 
-            background: var(--panel-bg); backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color); border-radius: 16px; 
-            padding: 40px; margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative; overflow: hidden;
-        }
-        .panel::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-        }
-        
-        h2 { margin-top: 0; color: var(--text-light); font-size: 24px; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+    header p { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
 
-        /* Podium */
-        .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 25px; margin-bottom: 50px; padding-top: 20px; }
-        .podium-place { 
-            background: linear-gradient(180deg, var(--panel-card) 0%, rgba(0,0,0,0.4) 100%);
-            border: 1px solid var(--border-color); border-radius: 16px; 
-            width: 200px; padding: 25px; text-align: center; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            animation: podiumBounce 0.8s ease-out;
-        }
-        @keyframes podiumBounce { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        
-        .podium-place:hover { transform: translateY(-8px); border-color: var(--accent-color); box-shadow: 0 20px 40px rgba(0, 255, 102, 0.15); }
-        .podium-place.p-1 { height: 190px; border-color: var(--gold); background: linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, var(--panel-card) 100%); }
-        .podium-place.p-2 { height: 155px; border-color: var(--silver); }
-        .podium-place.p-3 { height: 130px; border-color: var(--bronze); }
-        
-        .podium-badge { 
-            width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-weight: 900; color: #000; margin: -45px auto 15px auto; font-size: 16px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .p-1 .podium-badge { background: var(--gold); box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
-        .p-2 .podium-badge { background: var(--silver); box-shadow: 0 0 15px rgba(226, 232, 240, 0.4); }
-        .p-3 .podium-badge { background: var(--bronze); box-shadow: 0 0 15px rgba(180, 83, 9, 0.4); }
-        .podium-name { font-weight: 800; color: var(--text-light); font-size: 18px; margin-bottom: 5px; }
-        .podium-score { color: var(--accent-color); font-weight: 800; font-size: 16px; text-shadow: 0 0 10px var(--accent-glow); }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
 
-        /* Tabele */
-        .pro-table-wrapper { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.2); }
-        .pro-table { width: 100%; border-collapse: collapse; text-align: left; }
-        .pro-table th { text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; color: var(--accent-color); padding: 18px 24px; background: rgba(0,0,0,0.4); border-bottom: 1px solid var(--border-color); }
-        .pro-table td { padding: 20px 24px; border-bottom: 1px solid var(--border-color); color: var(--text-light); font-size: 14px; transition: background 0.2s; }
-        .pro-table tr:hover td { background: rgba(0, 255, 102, 0.02); }
-        
-        .premium-badge { 
-            background: rgba(0, 255, 102, 0.06); color: var(--accent-color); 
-            padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(0, 255, 102, 0.25); 
-            font-weight: 800; font-family: monospace; display: inline-block;
-            box-shadow: inset 0 0 8px rgba(0, 255, 102, 0.1);
-        }
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        /* Siatki i Karty */
-        .stats-summary-grid, .sub-topki-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 30px; }
-        .sub-topki-grid { grid-template-columns: 1fr 1fr; }
-        
-        .summary-card, .leaderboard-item { 
-            background: var(--panel-card); padding: 20px 25px; border-radius: 12px; 
-            border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .summary-card:hover, .leaderboard-item:hover { transform: translateY(-2px); border-color: rgba(0,255,102,0.3); }
-        .summary-card div:first-child { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-        .summary-card div:last-child { font-size: 24px; font-weight: 900; color: var(--text-light); }
+    form { display: flex; gap: 10px; flex-wrap: wrap; }
 
-        /* Sekcja turniejowa */
-        .tournament-stage { margin-bottom: 40px; }
-        .stage-title { border-left: 4px solid var(--accent-color); padding: 4px 15px; font-weight: 800; text-transform: uppercase; color: var(--text-light); margin-bottom: 20px; letter-spacing: 1px; font-size: 15px; }
-        .match-row { display: flex; justify-content: space-between; align-items: center; background: var(--panel-card); border: 1px solid var(--border-color); padding: 20px 25px; border-radius: 12px; }
-        .match-winner { background: rgba(0, 255, 102, 0.1); color: var(--accent-color); padding: 6px 16px; border-radius: 30px; font-size: 12px; font-weight: 800; border: 1px solid rgba(0, 255, 102, 0.3); text-transform: uppercase; }
+    input[type="text"] {
+      flex: 1 1 220px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
 
-        /* Klipy */
-        .clips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .clip-card { 
-            background: var(--panel-card); border: 1px solid var(--border-color); padding: 25px; border-radius: 14px;
-            transition: all 0.3s ease; display: flex; flex-direction: column; gap: 10px; position: relative;
-        }
-        .clip-card:hover { transform: scale(1.02); border-color: var(--accent-color); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+    }
 
-        /* Modale */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); display: none; z-index: 1000; animation: fadeIn 0.3s; }
-        .custom-modal { 
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); 
-            background: rgba(10, 18, 26, 0.95); backdrop-filter: blur(25px); border: 1px solid rgba(0, 255, 102, 0.2); 
-            border-radius: 20px; padding: 40px; width: 420px; display: none; z-index: 1010; 
-            box-shadow: 0 30px 70px rgba(0,0,0,0.8); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .custom-modal.open { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .modal-header h3 { margin: 0; color: var(--text-light); text-transform: uppercase; font-size: 18px; letter-spacing: 1px; }
-        .modal-close-btn { font-size: 20px; cursor: pointer; color: var(--text-color); }
-        .modal-close-btn:hover { color: #ef4444; }
+    button {
+      background: var(--primary);
+      color: #04221f;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 22px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.05s;
+    }
 
-        .auth-subnav { display: flex; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); }
-        .auth-subnav button { background: transparent; border: none; color: var(--text-color); font-weight: 700; cursor: pointer; padding: 12px 5px; font-size: 14px; text-transform: uppercase; }
-        .auth-subnav button.active { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); }
+    button:hover { background: var(--primary-hover); }
+    button:active { transform: scale(0.97); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .captcha-box { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.4); padding: 8px 15px; border-radius: 10px; border: 1px solid var(--border-color); }
-        .captcha-display { color: var(--accent-color); font-weight: 900; font-size: 22px; letter-spacing: 5px; font-family: monospace; text-shadow: 0 0 8px var(--accent-glow); }
+    .status {
+      font-size: 0.85rem;
+      margin-top: 12px;
+      min-height: 18px;
+      color: var(--muted);
+    }
+    .status.error { color: #f87171; }
+    .status.success { color: #34d399; }
 
-        /* Panel admina */
-        .admin-table-list { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
-        .admin-table-list th { color: var(--accent-color); text-align: left; padding: 10px; border-bottom: 1px solid var(--border-color); text-transform: uppercase; font-size: 11px; }
-        .admin-table-list td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #fff; }
-        .adm-actions-cell { display: flex; gap: 5px; }
+    ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
-        #adminModal { width: 850px; max-height: 85vh; overflow-y: auto; }
-        .admin-modal-content textarea { width: 100%; height: 130px; background: rgba(0,0,0,0.4); color: var(--text-light); border: 1px solid var(--border-color); border-radius: 10px; padding: 15px; box-sizing: border-box; font-family: monospace; resize: vertical; margin-bottom: 15px; outline: none; }
-        .admin-sec-title { color: var(--accent-color); font-weight: 800; text-transform: uppercase; font-size: 12px; margin: 30px 0 15px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; letter-spacing: 1px; }
-        .admin-grid-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; margin-bottom: 15px; }
-        
-        .admin-trigger { position: fixed; bottom: 20px; left: 20px; background: var(--panel-bg); backdrop-filter: blur(10px); color: var(--text-color); padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: bold; border: 1px solid var(--border-color); z-index: 950; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s; }
-        .admin-trigger:hover { border-color: var(--accent-color); color: var(--text-light); box-shadow: 0 0 15px var(--accent-glow); }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+    li {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      word-break: break-word;
+      animation: fadeIn 0.25s ease;
+    }
+
+    li .time { display: block; color: var(--muted); font-size: 0.75rem; margin-top: 4px; }
+
+    .empty { color: var(--muted); font-style: italic; text-align: center; padding: 12px; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-
+  <div class="container">
     <header>
-        <div class="header-left">
-            <div class="settings-icon" id="settingsTrigger">⚙️</div>
-            <div class="logo">MKMK</div>
-        </div>
-        <div class="header-right">
-            <nav class="tabs-nav">
-                <button class="tab-btn active" id="btn-topki">Topki</button>
-                <button class="tab-btn" id="btn-turnieje">Turnieje</button>
-                <button class="tab-btn" id="btn-klipy">Strefa Klubu</button>
-            </nav>
-            <div class="auth-zone" id="authZone"></div>
-        </div>
+      <h1>mkmk</h1>
+      <p>Zapisuj i odczytuj dane w czasie rzeczywistym</p>
     </header>
 
-    <div class="settings-sidebar" id="settingsSidebar">
-        <div class="sidebar-header">
-            <h3>Ustawienia Witryny</h3>
-            <div class="close-sidebar" id="closeSidebar">✕</div>
-        </div>
-        <div class="setting-item">
-            <label>Tryb Streamera</label>
-            <input type="checkbox" id="streamerToggle"> Ukryj nazwy graczy
-        </div>
-        <div class="setting-item">
-            <label>Motyw Wizualny</label>
-            <select class="settings-select" id="themeSelect">
-                <option value="black">Głęboka Czerń</option>
-                <option value="gray">Stylowy Szary</option>
-                <option value="light">Jasny Podstawowy</option>
-            </select>
-        </div>
-        <div class="setting-item">
-            <label>Region Gry (Serwer)</label>
-            <select class="settings-select" id="regionSelect">
-                <option value="EU-West">Europa Zachód</option>
-                <option value="EU-East">Europa Wschód</option>
-            </select>
-        </div>
-        <div class="setting-item">
-            <label>Status Bazy Firebase</label>
-            <div style="color: #00ff66; font-weight: bold; font-size: 13px; margin-top: 5px; display: flex; align-items: center; gap: 6px;">
-                <span style="width: 8px; height: 8px; background: #00ff66; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #00ff66;"></span>
-                AUTO-LIVE ACTIVE
-            </div>
-        </div>
-    </div>
+    <section class="card">
+      <h2>Dodaj wpis</h2>
+      <form id="dataForm">
+        <input type="text" id="textInput" placeholder="Wpisz tekst..." autocomplete="off" required />
+        <button type="submit" id="saveBtn">Zapisz</button>
+      </form>
+      <div class="status" id="status"></div>
+    </section>
 
-    <div class="modal-overlay" id="modalOverlay"></div>
+    <section class="card">
+      <h2>Zapisane dane</h2>
+      <ul id="dataList">
+        <li class="empty">Ładowanie danych...</li>
+      </ul>
+    </section>
+  </div>
 
-    <div class="custom-modal" id="loginModal">
-        <div class="modal-header">
-            <h3 id="authModalTitle">Panel Gracza</h3>
-            <span class="modal-close-btn" id="closeLoginBtn">✕</span>
-        </div>
-        <div class="auth-subnav">
-            <button id="subtabLogin" class="active">Logowanie</button>
-            <button id="subtabRegister">Rejestracja</button>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:15px; margin-bottom:15px;">
-            <input type="text" id="uNick" class="auth-input" placeholder="Nazwa użytkownika">
-            <input type="password" id="uPass" class="auth-input" placeholder="Hasło dostępu">
-            <div class="captcha-box">
-                <div class="captcha-display" id="captchaValue">XXXX</div>
-                <div style="cursor:pointer;" id="refreshCaptcha">🔄</div>
-                <input type="text" id="uCaptchaInput" class="auth-input" placeholder="Kod" style="flex-grow:1;">
-            </div>
-        </div>
-        <button class="btn" id="authSubmitBtn" style="width:100%; padding:14px;">Zaloguj się</button>
-    </div>
+  <script type="module">
+    // --- Importy modułowego SDK Firebase (v10+) ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import {
+      getDatabase,
+      ref,
+      push,
+      onValue
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
-    <div class="custom-modal" id="adminModal">
-        <div class="modal-header">
-            <h3>⚙️ Kwatera Główna Admin Center</h3>
-            <span class="modal-close-btn" id="closeAdminBtn">✕</span>
-        </div>
-        <div id="adminLoginBlock">
-            <input type="password" id="adminPasswordInput" class="auth-input" placeholder="Wpisz tajne hasło administratora" style="margin-bottom:20px;">
-            <button class="btn" style="width:100%;" id="adminAuthSubmit">Wejdź do systemu</button>
-        </div>
-        <div id="adminPanelControls" style="display:none;" class="admin-modal-content">
-            <div class="admin-sec-title">📊 Zarządzanie Główną Topką (Premier)</div>
-            <table class="admin-table-list">
-                <thead><tr><th>Nick</th><th>Premier</th><th>K/D</th><th>WinRate</th><th>Akcje</th></tr></thead>
-                <tbody id="admPremierPlayersList"></tbody>
-            </table>
-            <div class="admin-grid-inputs">
-                <input type="text" id="admNick" class="auth-input" placeholder="Nick gracza">
-                <input type="number" id="admPremier" class="auth-input" placeholder="Punkty Premier">
-                <input type="text" id="admKd" class="auth-input" placeholder="K/D (np. 1.15)">
-                <input type="text" id="admWr" class="auth-input" placeholder="WinRate (np. 55%)">
-                <input type="number" id="admMecze" class="auth-input" placeholder="Mecze">
-                <input type="number" id="admAdr" class="auth-input" placeholder="ADR">
-            </div>
-            <button class="btn" style="width:100%; margin-bottom:25px;" id="addPlayerBtn">Zapisz Gracza</button>
+    // --- Konfiguracja Firebase ---
+    // Wklej tutaj swoje klucze z panelu Firebase (Ustawienia projektu > Twoje aplikacje).
+    const firebaseConfig = {
+      apiKey: "TWÓJ_API_KEY",
+      authDomain: "TWÓJ_AUTH_DOMAIN",
+      databaseURL: "TWÓJ_DATABASE_URL", // np. https://twoj-projekt-default-rtdb.europe-west1.firebasedatabase.app
+      projectId: "TWÓJ_PROJECT_ID",
+      storageBucket: "TWÓJ_STORAGE_BUCKET",
+      messagingSenderId: "TWÓJ_MESSAGING_SENDER_ID",
+      appId: "TWÓJ_APP_ID"
+    };
 
-            <div class="admin-sec-title">🏆 Edycja Topek Pobocznych & Drabinki</div>
-            <label style="font-size:11px; font-weight:bold; color: var(--text-color); display:block; margin-bottom:5px;">Topka FaceIT (Nick|Poziom|Opis)</label>
-            <textarea id="rawFaceitText"></textarea>
-            <label style="font-size:11px; font-weight:bold; color: var(--text-color); display:block; margin-bottom:5px;">Topka PKT Eventowych (Nick|Punkty)</label>
-            <textarea id="rawPktText"></textarea>
-            <label style="font-size:11px; font-weight:bold; color: var(--text-color); display:block; margin-bottom:5px;">Drabinka Turniejowa (Etap|Mecz|Zwycięzca)</label>
-            <textarea id="rawBracketText"></textarea>
-            <button class="btn" style="width:100%; background:var(--accent-color); color:#000;" id="saveTextsBtn">💾 Zapisz Tabele Tekstowe</button>
+    // --- Inicjalizacja ---
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const dataRef = ref(db, "mkmk_dane");
 
-            <div class="admin-sec-title">👥 Zarządzanie Wszystkimi Kontami Użytkowników</div>
-            <table class="admin-table-list">
-                <thead><tr><th>Użytkownik</th><th>Data konta</th></tr></thead>
-                <tbody id="admUsersList"></tbody>
-            </table>
-        </div>
-    </div>
+    // --- Elementy DOM ---
+    const form = document.getElementById("dataForm");
+    const input = document.getElementById("textInput");
+    const saveBtn = document.getElementById("saveBtn");
+    const statusEl = document.getElementById("status");
+    const list = document.getElementById("dataList");
 
-    <div class="admin-trigger" id="adminTriggerBtn">🔒 Admin Panel</div>
+    function setStatus(message, type = "") {
+      statusEl.textContent = message;
+      statusEl.className = "status" + (type ? " " + type : "");
+    }
 
-    <div class="container">
-        <div id="topki" class="tab-content active">
-            <div class="podium-container" id="podiumContainer"></div>
-            <div class="panel">
-                <h2>📊 Ogólny Ranking Serwera Premier</h2>
-                <div class="pro-table-wrapper">
-                    <table class="pro-table">
-                        <thead><tr><th>Gracz</th><th>Premier</th><th>K/D</th><th>Win Rate</th><th>Mecze</th><th>ADR</th></tr></thead>
-                        <tbody id="mainPremierTableBody"></tbody>
-                    </table>
-                </div>
-                <div class="stats-summary-grid" id="statsSummaryContainer"></div>
-            </div>
-            <div class="sub-topki-grid">
-                <div class="panel"><h2>🏆 Topka LVL FaceIT</h2><div id="faceitListContainer"></div></div>
-                <div class="panel"><h2>🗡️ Topka PKT (Eventy)</h2><div id="pktListContainer"></div></div>
-            </div>
-        </div>
+    // --- Zapis danych do węzła 'mkmk_dane' ---
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
 
-        <div id="turnieje" class="tab-content">
-            <div class="panel"><h2>⚔️ Rozgrywki Drabinkowe</h2><div id="bracketContainer"></div></div>
-        </div>
+      saveBtn.disabled = true;
+      setStatus("Zapisywanie...");
 
-        <div id="klipy" class="tab-content">
-            <div class="panel">
-                <h2>🎬 Opublikuj Nową Akcję</h2>
-                <div id="clipFormContainer" style="display:none; flex-direction: column; gap:15px;">
-                    <input type="text" id="cName" class="auth-input" placeholder="Nazwa efektownej akcji">
-                    <input type="text" id="cUrl" class="auth-input" placeholder="Link do klipu (YouTube / Medal.tv)">
-                    <button class="btn" id="submitClipBtn" style="align-self: flex-start;">Wyślij Klip na Tablicę</button>
-                </div>
-                <p id="clipWarn" style="margin: 0; font-style: italic; color: var(--text-color);">Zaloguj się w strefie konta, aby dodać swój klip.</p>
-            </div>
-            <div class="panel"><h2>🎬 Najnowsze Klipy Społeczności</h2><div class="clips-grid" id="clipsContainer"></div></div>
-        </div>
-    </div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAe6_ODkyqxC4FmMvP4rdY5-lLKUyuv7UY",
-            authDomain: "mkmk-618e7.firebaseapp.com",
-            projectId: "mkmk-618e7",
-            storageBucket: "mkmk-618e7.firebasestorage.app",
-            messagingSenderId: "942857686875",
-            appId: "1:942857686875:web:fb5fb7573319a69430d47e",
-            measurementId: "G-8SJH9VZTYN",
-            databaseURL: "https://mkmk-618e7-default-rtdb.europe-west1.firebasedatabase.app/"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        let state = {
-            mainPremierTop: [],
-            userAccounts: {},
-            topFaceit: "",
-            topPkt: "",
-            tournamentBracket: "",
-            userClips: []
-        };
-
-        let streamerMode = false;
-        let authMode = 'login';
-        let captcha = '';
-
-        // Słuchamy zmian w bazie
-        onValue(ref(db, 'mkmk_data'), (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                state.mainPremierTop = data.mainPremierTop || [];
-                state.userAccounts = data.userAccounts || {};
-                state.topFaceit = data.topFaceit || "M____K|3 Level|(758)\nChysik|5 Level|(1200)";
-                state.topPkt = data.topPkt || "Huzarjr|1 pkt\nmr.monkax|1 pkt";
-                state.tournamentBracket = data.tournamentBracket || "Finał|MKMK vs TeamX|MKMK";
-                state.userClips = data.userClips ? Object.values(data.userClips) : [];
-            } else {
-                const initial = {
-                    mainPremierTop: [{nick:"pientaszek27",premier:4667,kd:"0.63",wr:"43%",mecze:14,adr:72},{nick:"Chysik",premier:3964,kd:"0.96",wr:"50%",mecze:21,adr:81}],
-                    topFaceit: "M____K|3 Level|(758)\nChysik|5 Level|(1200)",
-                    topPkt: "Huzarjr|1 pkt\nmr.monkax|1 pkt",
-                    tournamentBracket: "Finał|MKMK vs TeamX|MKMK",
-                    userAccounts: {}
-                };
-                set(ref(db, 'mkmk_data'), initial);
-            }
-            renderAll();
-            if(document.getElementById('adminPanelControls').style.display === 'block') {
-                refreshAdminLists();
-            }
+      try {
+        await push(dataRef, {
+          text: text,
+          createdAt: Date.now()
         });
+        input.value = "";
+        setStatus("Zapisano pomyślnie!", "success");
+      } catch (err) {
+        console.error("[mkmk] Błąd zapisu:", err);
+        setStatus("Błąd zapisu: " + (err?.message || err), "error");
+      } finally {
+        saveBtn.disabled = false;
+        input.focus();
+      }
+    });
 
-        function pushState() {
-            set(ref(db, 'mkmk_data/mainPremierTop'), state.mainPremierTop);
-            set(ref(db, 'mkmk_data/topFaceit'), state.topFaceit);
-            set(ref(db, 'mkmk_data/topPkt'), state.topPkt);
-            set(ref(db, 'mkmk_data/tournamentBracket'), state.tournamentBracket);
+    // --- Odczyt w czasie rzeczywistym ---
+    onValue(
+      dataRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        list.innerHTML = "";
+
+        if (!data) {
+          const li = document.createElement("li");
+          li.className = "empty";
+          li.textContent = "Brak danych. Dodaj pierwszy wpis!";
+          list.appendChild(li);
+          return;
         }
 
-        function switchTab(t, btn) {
-            document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(e=>e.classList.remove('active'));
-            document.getElementById(t).classList.add('active');
-            btn.classList.add('active');
+        // Zamieniamy obiekt na tablicę i sortujemy od najnowszych
+        const entries = Object.entries(data).map(([key, value]) => ({ key, ...value }));
+        entries.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+        for (const entry of entries) {
+          const li = document.createElement("li");
+
+          const span = document.createElement("span");
+          span.textContent = entry.text ?? "(brak tekstu)";
+          li.appendChild(span);
+
+          if (entry.createdAt) {
+            const time = document.createElement("span");
+            time.className = "time";
+            time.textContent = new Date(entry.createdAt).toLocaleString("pl-PL");
+            li.appendChild(time);
+          }
+
+          list.appendChild(li);
         }
-        document.getElementById('btn-topki').onclick = (e) => switchTab('topki', e.target);
-        document.getElementById('btn-turnieje').onclick = (e) => switchTab('turnieje', e.target);
-        document.getElementById('btn-klipy').onclick = (e) => switchTab('klipy', e.target);
-
-        document.getElementById('settingsTrigger').onclick = () => document.getElementById('settingsSidebar').classList.toggle('open');
-        document.getElementById('closeSidebar').onclick = () => document.getElementById('settingsSidebar').classList.remove('open');
-        document.getElementById('themeSelect').onchange = (e) => {
-            document.body.className = ''; 
-            if(e.target.value !== 'black') document.body.classList.add('theme-' + e.target.value);
-        };
-        document.getElementById('streamerToggle').onchange = (e) => {
-            streamerMode = e.target.checked;
-            renderAll();
-        };
-
-        function mask(n) { return streamerMode ? "[UKRYTE]" : n; }
-
-        function generateCaptcha() {
-            captcha = Math.random().toString(36).substring(2,6).toUpperCase();
-            document.getElementById('captchaValue').innerText = captcha;
-        }
-        document.getElementById('refreshCaptcha').onclick = () => generateCaptcha();
-
-        function openModal(id) {
-            document.getElementById('modalOverlay').style.display = 'block';
-            const m = document.getElementById(id);
-            m.style.display = 'block';
-            setTimeout(() => m.classList.add('open'), 10);
-        }
-        function closeModal(id) {
-            const m = document.getElementById(id);
-            m.classList.remove('open');
-            setTimeout(() => { m.style.display = 'none'; document.getElementById('modalOverlay').style.display = 'none'; }, 200);
-        }
-
-        window.openLoginModal = () => { openModal('loginModal'); setAuthMode('login'); };
-        document.getElementById('closeLoginBtn').onclick = () => closeModal('loginModal');
-        document.getElementById('adminTriggerBtn').onclick = () => openModal('adminModal');
-        document.getElementById('closeAdminBtn').onclick = () => closeModal('adminModal');
-        document.getElementById('modalOverlay').onclick = () => { closeModal('loginModal'); closeModal('adminModal'); };
-
-        function setAuthMode(m) {
-            authMode = m; generateCaptcha();
-            document.getElementById('uNick').value = '';
-            document.getElementById('uPass').value = '';
-            document.getElementById('uCaptchaInput').value = '';
-            document.getElementById('subtabLogin').className = m==='login'?'active':'';
-            document.getElementById('subtabRegister').className = m==='register'?'active':'';
-            document.getElementById('authSubmitBtn').innerText = m==='login'?'Zaloguj się':'Zarejestruj się';
-        }
-        document.getElementById('subtabLogin').onclick = () => setAuthMode('login');
-        document.getElementById('subtabRegister').onclick = () => setAuthMode('register');
-
-        // BŁYSKAWICZNE I NIEZAWODNE LOGOWANIE / REJESTRACJA
-        document.getElementById('authSubmitBtn').onclick = async () => {
-            const n = document.getElementById('uNick').value.trim(), p = document.getElementById('uPass').value, c = document.getElementById('uCaptchaInput').value.trim();
-            if(!n || !p) return alert('Uzupełnij pola!');
-            if(c.toUpperCase() !== captcha) return alert('Błędna CAPTCHA!');
-
-            // Pobieramy świeże dane z węzła użytkowników
-            const snapshot = await get(ref(db, 'mkmk_data/userAccounts'));
-            const accounts = snapshot.val() || {};
-
-            // Normalizujemy klucz do małych liter dla unikalności nicków
-            const userKey = n.toLowerCase();
-
-            if(authMode === 'login') {
-                const exist = accounts[userKey];
-                if(!exist || String(exist.pass) !== String(p)) {
-                    return alert('Błędna nazwa użytkownika lub hasło!');
-                }
-                localStorage.setItem('activeUser', exist.username);
-                alert(`Witaj ponownie, ${exist.username}!`);
-            } else {
-                if(accounts[userKey]) {
-                    return alert('Ta nazwa użytkownika jest już zajęta!');
-                }
-                
-                // Tworzymy użytkownika bezpośrednio pod jego nazwą jako unikalny klucz
-                const newUserData = {
-                    username: n, 
-                    created: new Date().toISOString().split('T')[0], 
-                    pass: String(p)
-                };
-                
-                await set(ref(db, `mkmk_data/userAccounts/${userKey}`), newUserData);
-                localStorage.setItem('activeUser', n);
-                alert(`Konto ${n} zostało pomyślnie utworzone!`);
-            }
-            closeModal('loginModal'); updateAuthBar(); renderAll();
-        };
-
-        function updateAuthBar() {
-            const u = localStorage.getItem('activeUser'), z = document.getElementById('authZone');
-            if(u) {
-                z.innerHTML = `<span>● ${u}</span><button class="btn-danger" id="logoutBtn">Wyloguj</button>`;
-                document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('activeUser'); updateAuthBar(); renderAll(); };
-                document.getElementById('clipFormContainer').style.display='flex'; document.getElementById('clipWarn').style.display='none';
-            } else {
-                z.innerHTML = `<button class="btn" onclick="openLoginModal()">Konto</button>`;
-                document.getElementById('clipFormContainer').style.display='none'; document.getElementById('clipWarn').style.display='block';
-            }
-        }
-
-        function renderAll() {
-            const players = [...state.mainPremierTop].sort((a,b)=>b.premier-a.premier);
-            const pod = document.getElementById('podiumContainer'); pod.innerHTML = '';
-            const order = [{p:players[1],r:2,c:"p-2"},{p:players[0],r:1,c:"p-1"},{p:players[2],r:3,c:"p-3"}];
-            order.forEach(i=>{ if(i.p) pod.innerHTML+=`<div class="podium-place ${i.c}"><div class="podium-badge">${i.r}</div><div class="podium-name">${mask(i.p.nick)}</div><div class="podium-score">${i.p.premier} mkmk</div></div>`; });
-
-            const tb = document.getElementById('mainPremierTableBody'); tb.innerHTML = '';
-            let m=0, kd=0;
-            players.forEach((p, idx)=>{ m+=parseInt(p.mecze||0); kd+=parseFloat(p.kd||0); tb.innerHTML+=`<tr><td><span style="color:var(--text-color); margin-right:10px;">#${idx+1}</span> <b>${mask(p.nick)}</b></td><td><span class="premium-badge">${p.premier}</span></td><td>${p.kd}</td><td>${p.wr}</td><td>${p.mecze}</td><td style="color:var(--accent-color); font-weight:bold;">${p.adr}</td></tr>`; });
-            document.getElementById('statsSummaryContainer').innerHTML = `<div class="summary-card"><div>Łączne Mecze</div><div>${m}</div></div><div class="summary-card"><div>Średni K/D</div><div>${(kd/(players.length||1)).toFixed(2)}</div></div><div class="summary-card"><div>Zarejestrowani</div><div>${players.length}</div></div>`;
-
-            const fCont = document.getElementById('faceitListContainer'); fCont.innerHTML='';
-            state.topFaceit.split('\n').forEach((row,idx)=>{ if(!row.trim())return; const pts=row.split('|'); fCont.innerHTML+=`<div class="leaderboard-item"><div>#0${idx+1} ${mask(pts[0])}</div><div><span class="premium-badge" style="border-color:transparent; background:rgba(255,255,255,0.05); color:#fff">${pts[1]||''}</span></div></div>`; });
-
-            const pCont = document.getElementById('pktListContainer'); pCont.innerHTML='';
-            state.topPkt.split('\n').forEach((row,idx)=>{ if(!row.trim())return; const pts=row.split('|'); pCont.innerHTML+=`<div class="leaderboard-item"><div>#0${idx+1} ${mask(pts[0])}</div><div style="color:var(--accent-color); font-weight:900;">${pts[1]||''}</div></div>`; });
-
-            const bCont = document.getElementById('bracketContainer'); bCont.innerHTML='';
-            state.tournamentBracket.split('\n').forEach(row=>{ if(!row.trim())return; const pts=row.split('|'); bCont.innerHTML+=`<div class="tournament-stage"><div class="stage-title">${pts[0]}</div><div class="match-row"><div>${pts[1]}</div><div class="match-winner">${pts[2]}</div></div></div>`; });
-
-            const cCont = document.getElementById('clipsContainer'); cCont.innerHTML='';
-            state.userClips.forEach(c=>{ cCont.innerHTML+=`<div class="clip-card"><b style="color:#fff; font-size:16px;">${c.name}</b><small style="color:var(--text-color)">Wysłane przez: ${mask(c.author)}</small><a href="${c.url}" target="_blank" class="btn" style="padding:8px 12px; text-align:center; margin-top:10px; font-size:11px; background:var(--accent-color)">Oglądaj Akcję</a></div>`; });
-        }
-
-        document.getElementById('adminAuthSubmit').onclick = () => {
-            if(document.getElementById('adminPasswordInput').value === "MKMKCS2") {
-                document.getElementById('adminLoginBlock').style.display='none'; 
-                document.getElementById('adminPanelControls').style.display='block';
-                document.getElementById('rawFaceitText').value = state.topFaceit;
-                document.getElementById('rawPktText').value = state.topPkt;
-                document.getElementById('rawBracketText').value = state.tournamentBracket;
-                refreshAdminLists();
-            } else alert('Błąd!');
-        };
-
-        function refreshAdminLists() {
-            const pTb = document.getElementById('admPremierPlayersList'); pTb.innerHTML='';
-            state.mainPremierTop.forEach((p,i)=>{ 
-                pTb.innerHTML+=`<tr><td>${p.nick}</td><td>${p.premier}</td><td>${p.kd}</td><td>${p.wr}</td><td class="adm-actions-cell"><button class="btn-secondary" data-edit="${i}">Edytuj</button><button class="btn-danger" data-del="${i}">Usuń</button></td></tr>`; 
-            });
-            pTb.querySelectorAll('[data-edit]').forEach(b => b.onclick = (e) => loadPl(e.target.getAttribute('data-edit')));
-            pTb.querySelectorAll('[data-del]').forEach(b => b.onclick = (e) => delPl(e.target.getAttribute('data-del')));
-
-            const uTb = document.getElementById('admUsersList'); uTb.innerHTML='';
-            Object.keys(state.userAccounts).forEach(k => {
-                const u = state.userAccounts[k];
-                if(u && u.username) {
-                    uTb.innerHTML+=`<tr><td>${u.username}</td><td>${u.created || 'Brak danych'}</td></tr>`; 
-                }
-            });
-        }
-
-        function loadPl(i) {
-            const p = state.mainPremierTop[i];
-            document.getElementById('admNick').value=p.nick; document.getElementById('admPremier').value=p.premier;
-            document.getElementById('admKd').value=p.kd; document.getElementById('admWr').value=p.wr;
-            document.getElementById('admMecze').value=p.mecze; document.getElementById('admAdr').value=p.adr;
-        }
-        function delPl(i) { 
-            state.mainPremierTop.splice(i,1); 
-            pushState();
-        }
-
-        document.getElementById('addPlayerBtn').onclick = () => {
-            const n = document.getElementById('admNick').value.trim(), p = parseInt(document.getElementById('admPremier').value);
-            if(!n || isNaN(p)) return alert('Wpisz nick i punkty!');
-            state.mainPremierTop = state.mainPremierTop.filter(x=>x.nick.toLowerCase()!==n.toLowerCase());
-            state.mainPremierTop.push({nick:n, premier:p, kd:document.getElementById('admKd').value||"1.0", wr:document.getElementById('admWr').value||"50%", mecze:document.getElementById('admMecze').value||0, adr:document.getElementById('admAdr').value||0});
-            pushState();
-        };
-
-        document.getElementById('saveTextsBtn').onclick = () => {
-            state.topFaceit = document.getElementById('rawFaceitText').value;
-            state.topPkt = document.getElementById('rawPktText').value;
-            state.tournamentBracket = document.getElementById('rawBracketText').value;
-            pushState();
-            closeModal('adminModal');
-            alert('Zapisano w chmurze!');
-        };
-
-        document.getElementById('submitClipBtn').onclick = () => {
-            // Kod dla klipów też korzysta ze standardowej biblioteki bez push-importów
-            alert('Funkcja klipów została zaktualizowana!');
-        };
-
-        updateAuthBar();
-    </script>
+      },
+      (err) => {
+        // Obsługa błędów (np. zablokowany odczyt przez reguły bezpieczeństwa)
+        console.error("[mkmk] Błąd odczytu:", err);
+        list.innerHTML = "";
+        const li = document.createElement("li");
+        li.className = "empty";
+        li.textContent = "Nie udało się pobrać danych: " + (err?.message || err);
+        list.appendChild(li);
+      }
+    );
+  </script>
 </body>
 </html>
