@@ -3,266 +3,400 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MKMK — Premium Dark Luxury</title>
+<title>MKMK — Premium Emerald Gaming Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0a0a0c; --bg-2:#111114; --panel:#15151a; --panel-2:#1c1c22;
-    --line:#26262e; --line-2:#33333d;
-    --text:#ecead8; --muted:#8a8a95;
-    --gold:#c9a96e; --gold-2:#e6c98b; --gold-soft:#3a2f1c;
-    --red:#c8475a; --green:#5fb37a;
-    --shadow: 0 30px 80px -20px rgba(0,0,0,.6);
-    --radius: 14px;
+  :root {
+    --bg: #050806;
+    --bg-2: #090e0b;
+    --panel: #0d1410;
+    --panel-2: #131d17;
+    --line: #1c2c22;
+    --line-2: #2a3f32;
+    --text: #e6f4ed;
+    --muted: #8fa397;
+    --gold: #4ade80;
+    --gold-2: #22c55e;
+    --gold-soft: rgba(74, 222, 128, 0.08);
+    --red: #f43f5e;
+    --shadow: 0 30px 80px -20px rgba(0,0,0,0.8);
+    --radius: 12px;
   }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.5px;margin:0}
-  .site{min-height:100vh;display:flex;flex-direction:column;background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(201,169,110,.08), transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, rgba(201,169,110,.06), transparent 60%),
-    var(--bg);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 40px;border-bottom:1px solid var(--line)}
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand-mark{width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:700}
-  .brand-name{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:6px}
-  .nav-links{display:flex;gap:28px;color:var(--muted);font-size:13px;letter-spacing:2px;text-transform:uppercase}
-  .nav-links span{cursor:pointer;transition:color .2s}
-  .nav-links span:hover{color:var(--gold)}
-  .hero{flex:1;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;padding:80px 60px;align-items:center;max-width:1400px;margin:0 auto;width:100%}
-  .eyebrow{color:var(--gold);letter-spacing:6px;font-size:12px;text-transform:uppercase;margin-bottom:20px}
-  .hero h1{font-size:clamp(48px,6vw,84px);line-height:1.05}
-  .hero h1 em{font-style:italic;color:var(--gold)}
-  .hero p{color:var(--muted);font-size:17px;line-height:1.7;max-width:520px;margin:24px 0 32px}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:999px;border:1px solid var(--gold);color:var(--gold);background:transparent;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .25s}
-  .btn:hover{background:var(--gold);color:#111}
-  .btn-solid{background:var(--gold);color:#111}
-  .btn-solid:hover{background:var(--gold-2)}
-  .hero-card{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .hero-card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 100% 0%, rgba(201,169,110,.12), transparent 60%);pointer-events:none}
-  .feed-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-  .feed-title h3{font-size:22px}
-  .feed-title .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
-  .add-row{display:flex;gap:10px;margin-bottom:18px}
-  .input{flex:1;background:#0d0d11;border:1px solid var(--line);color:var(--text);padding:12px 14px;border-radius:10px;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
-  .input:focus{border-color:var(--gold)}
-  .feed{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow:auto;padding-right:6px}
-  .feed::-webkit-scrollbar{width:6px}
-  .feed::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:3px}
-  .entry{background:#0d0d11;border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;gap:14px;animation:fade .35s ease}
-  .entry .meta{color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
-  .entry.priority{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,169,110,.06),transparent)}
-  .priority-tag{display:inline-block;font-size:10px;letter-spacing:2px;color:var(--gold);border:1px solid var(--gold);padding:2px 8px;border-radius:999px;margin-right:8px;text-transform:uppercase}
-  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .footer{display:flex;justify-content:space-between;align-items:center;padding:24px 40px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;letter-spacing:1px}
-  .lock{opacity:.25;cursor:pointer;transition:all .25s;padding:8px;border-radius:50%}
-  .lock:hover{opacity:1;color:var(--gold);background:rgba(201,169,110,.08)}
-  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:50}
-  .modal-bg.show{display:flex;animation:fade .25s ease}
-  .modal{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:36px;width:min(420px,90vw);box-shadow:var(--shadow)}
-  .modal h2{font-size:28px;margin-bottom:8px}
-  .modal p{color:var(--muted);font-size:13px;margin:0 0 20px}
-  .modal .actions{display:flex;gap:10px;margin-top:18px;justify-content:flex-end}
-  .btn-ghost{border:1px solid var(--line-2);color:var(--muted);background:transparent;padding:12px 20px;border-radius:999px;cursor:pointer;font-size:12px;letter-spacing:2px;text-transform:uppercase}
-  .btn-ghost:hover{color:var(--text);border-color:var(--text)}
-  .admin{display:none;min-height:100vh;background:var(--bg-2)}
-  .admin.show{display:grid;grid-template-columns:260px 1fr}
-  .sidebar{background:#0c0c10;border-right:1px solid var(--line);padding:28px 20px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
-  .side-brand{display:flex;align-items:center;gap:12px;padding:0 8px 24px;border-bottom:1px solid var(--line);margin-bottom:16px}
-  .side-brand .brand-mark{width:34px;height:34px;font-size:14px}
-  .side-brand .t{font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:4px}
-  .side-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;color:var(--muted);cursor:pointer;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
-  .side-item:hover{background:#15151a;color:var(--text)}
-  .side-item.active{background:rgba(201,169,110,.1);color:var(--gold)}
-  .side-spacer{flex:1}
-  .logout{color:var(--red)!important}
-  .main{padding:36px 48px}
-  .main-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--line)}
-  .main-head h1{font-size:40px}
-  .main-head .sub{color:var(--muted);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:6px}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px}
-  .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .stat .l{color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase}
-  .stat .v{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold);margin-top:8px}
-  .add-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:24px}
-  .add-panel h3{font-size:20px;margin-bottom:14px;color:var(--gold)}
-  .add-panel .row{display:flex;gap:10px;align-items:center}
-  .checkbox{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;user-select:none}
-  .checkbox input{accent-color:var(--gold)}
-  .table{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-  .table-head{display:grid;grid-template-columns:1fr 180px 200px;padding:16px 20px;border-bottom:1px solid var(--line);color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;background:#101015}
-  .row-item{display:grid;grid-template-columns:1fr 180px 200px;padding:16px 20px;border-bottom:1px solid var(--line);align-items:center;gap:14px;animation:fade .3s ease}
-  .row-item:last-child{border-bottom:none}
-  .row-item:hover{background:#16161c}
-  .row-text{font-size:14px;line-height:1.5;word-break:break-word}
-  .row-date{color:var(--muted);font-size:12px}
-  .row-actions{display:flex;gap:8px;justify-content:flex-end}
-  .icon-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--line-2);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:all .2s}
-  .icon-btn:hover{color:var(--gold);border-color:var(--gold)}
-  .icon-btn.danger:hover{color:var(--red);border-color:var(--red)}
-  .empty{padding:60px;text-align:center;color:var(--muted)}
-  textarea.input{resize:vertical;min-height:90px;font-family:inherit}
-  .toasts{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:100;pointer-events:none}
-  .toast{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;padding:14px 20px;color:var(--text);font-size:14px;box-shadow:var(--shadow);min-width:280px;animation:slidein .35s ease;pointer-events:auto}
-  .toast.success{border-left-color:var(--green)}
-  .toast.error{border-left-color:var(--red)}
-  .toast.info{border-left-color:var(--gold)}
-  .toast .title{font-weight:600;margin-bottom:2px;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
-  .toast.success .title{color:var(--green)}
-  .toast.error .title{color:var(--red)}
-  .toast .body{color:var(--muted);font-size:13px}
-  @keyframes slidein{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
-  @keyframes slideout{to{opacity:0;transform:translateX(20px)}}
-  .toast.out{animation:slideout .25s ease forwards}
-  @media (max-width: 900px){
-    .hero{grid-template-columns:1fr;padding:40px 24px;gap:40px}
-    .nav{padding:18px 24px}
-    .nav-links{display:none}
-    .admin.show{grid-template-columns:1fr}
-    .sidebar{position:relative;height:auto;flex-direction:row;flex-wrap:wrap}
-    .side-spacer{display:none}
-    .main{padding:24px}
-    .stats{grid-template-columns:1fr}
-    .table-head,.row-item{grid-template-columns:1fr;gap:8px}
-    .table-head{display:none}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  h1, h2, h3, .brand-name { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+  
+  /* APP WRAPPER */
+  .site-wrapper { display: flex; flex-direction: column; min-height: 100vh; background: radial-gradient(1000px 500px at 50% -10%, var(--gold-soft), transparent 70%); }
+  
+  /* NAV */
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 1px solid var(--line); background: rgba(5,8,6,0.8); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 40; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark { width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; display: grid; place-items: center; color: var(--gold); font-weight: 700; font-family: 'Cormorant Garamond', serif; }
+  .brand-name { font-size: 24px; letter-spacing: 4px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+  .nav-links li { cursor: pointer; color: var(--muted); transition: color .2s; }
+  .nav-links li:hover, .nav-links li.active { color: var(--gold); }
+  
+  /* BUTTONS & INPUTS */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold); background: transparent; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; cursor: pointer; transition: all .25s; }
+  .btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 15px rgba(74,222,128,0.4); }
+  .btn-solid { background: var(--gold); color: #000; }
+  .btn-solid:hover { background: var(--gold-2); }
+  .btn-danger { border-color: var(--red); color: var(--red); }
+  .btn-danger:hover { background: var(--red); color: #fff; box-shadow: none; }
+  .input { background: #030504; border: 1px solid var(--line); color: var(--text); padding: 12px 16px; border-radius: 8px; font-family: inherit; font-size: 14px; outline: none; transition: border-color .2s; width: 100%; }
+  .input:focus { border-color: var(--gold); }
+  .select { background: #030504; border: 1px solid var(--line); color: var(--text); padding: 12px; border-radius: 8px; outline: none; font-family: inherit; }
+
+  /* VIEWS CONTAINER */
+  .container { flex: 1; max-width: 1300px; width: 100%; margin: 0 auto; padding: 40px 20px; display: none; }
+  .container.active { display: block; animation: fadeIn 0.4s ease forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* HOME / HERO */
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
+  .hero-left h1 { font-size: clamp(40px, 5vw, 72px); line-height: 1.1; margin-bottom: 20px; }
+  .hero-left h1 em { font-style: italic; color: var(--gold); font-weight: 400; }
+  .hero-left p { color: var(--muted); line-height: 1.7; font-size: 16px; margin-bottom: 30px; max-width: 500px; }
+  .live-card { background: linear-gradient(145deg, var(--panel), var(--panel-2)); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); }
+  .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .pulse-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px var(--gold); }
+  .feed-box { max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-top: 15px; padding-right: 5px; }
+  .feed-box::-webkit-scrollbar { width: 4px; }
+  .feed-box::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 2px; }
+  .msg-item { background: rgba(0,0,0,0.2); border: 1px solid var(--line); padding: 12px; border-radius: 8px; font-size: 14px; }
+  .msg-meta { font-size: 10px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* TABLES & SUBTABS */
+  .sub-tabs { display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .sub-btn { background: transparent; border: none; color: var(--muted); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; padding: 6px 12px; transition: color .2s; font-family: inherit; }
+  .sub-btn.active { color: var(--gold); font-weight: 600; border-bottom: 2px solid var(--gold); }
+  .luxury-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .luxury-table th { background: rgba(0,0,0,0.3); text-align: left; padding: 16px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+  .luxury-table td { padding: 16px 20px; font-size: 14px; border-bottom: 1px solid var(--line); color: var(--text); }
+  .luxury-table tr:last-child td { border-bottom: none; }
+  .luxury-table tr:hover td { background: rgba(74,222,128,0.02); }
+  .rank-badge { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-weight: 700; font-size: 12px; }
+  .rank-1 { background: rgba(74,222,128,0.2); color: var(--gold); border: 1px solid var(--gold); }
+
+  /* BRACKET (DRABINKA) */
+  .bracket-container { display: flex; gap: 40px; justify-content: space-between; align-items: center; overflow-x: auto; padding: 40px 10px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
+  .bracket-round { display: flex; flex-direction: column; justify-content: space-around; gap: 20px; min-width: 220px; height: 440px; }
+  .bracket-match { display: flex; flex-direction: column; background: #050806; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); }
+  .bracket-slot { padding: 12px 16px; font-size: 13px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); color: var(--muted); }
+  .bracket-slot:last-child { border-bottom: none; }
+  .bracket-slot.winner { color: var(--gold); font-weight: 600; background: rgba(74,222,128,0.04); }
+
+  /* CLIPS GRID */
+  .clips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+  .clip-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform .3s; }
+  .clip-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .clip-video { width: 100%; height: 200px; background: #000; border-bottom: 1px solid var(--line); position: relative; }
+  .clip-video iframe, .clip-video video { width: 100%; height: 100%; border: none; }
+  .clip-info { padding: 20px; }
+  .clip-info h3 { font-size: 18px; margin-bottom: 6px; color: var(--text); }
+  .clip-meta { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* MODALS */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); display: none; place-items: center; z-index: 100; padding: 20px; }
+  .modal-overlay.active { display: grid; }
+  .modal-window { background: var(--panel); border: 1px solid var(--line); padding: 36px; border-radius: var(--radius); width: 100%; max-width: 420px; box-shadow: var(--shadow); box-sizing: border-box; }
+  .modal-window h2 { font-size: 28px; margin-bottom: 8px; }
+  .modal-window p { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
+
+  /* ADMIN PANEL LAYOUT */
+  .admin-view { display: none; min-height: 100vh; background: var(--bg-2); }
+  .admin-view.active { display: grid; grid-template-columns: 280px 1fr; }
+  .admin-sidebar { background: #030504; border-right: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; position: sticky; top: 0; height: 100vh; }
+  .admin-menu-top { display: flex; flex-direction: column; gap: 24px; }
+  .admin-settings-trigger { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; padding: 10px; border-radius: 6px; border: 1px dashed var(--line); transition: all .2s; }
+  .admin-settings-trigger:hover, .admin-settings-trigger.active { color: var(--gold); border-color: var(--gold); background: var(--gold-soft); }
+  .admin-nav-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .admin-nav-item { padding: 12px 16px; border-radius: 8px; font-size: 13px; color: var(--muted); cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all .2s; }
+  .admin-nav-item:hover, .admin-nav-item.active { background: var(--panel); color: var(--text); border-left: 3px solid var(--gold); }
+  .admin-logout-btn { color: var(--red); border: 1px solid rgba(244,63,94,0.2); padding: 12px; border-radius: 8px; text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .admin-logout-btn:hover { background: var(--red); color: #fff; }
+  
+  .admin-content { padding: 40px; overflow-y: auto; height: 100vh; }
+  .admin-sec { display: none; }
+  .admin-sec.active { display: block; animation: fadeIn 0.3s ease; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-group label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+
+  /* TOASTS */
+  .toast-container { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 200; pointer-events: none; }
+  .toast { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--gold); color: var(--text); padding: 16px 20px; border-radius: 8px; box-shadow: var(--shadow); font-size: 13px; pointer-events: auto; animation: slideIn 0.3s ease; }
+  @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+  
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .nav { padding: 15px 20px; }
+    .nav-links { display: none; }
+    .admin-view.active { grid-template-columns: 1fr; }
+    .admin-sidebar { height: auto; position: relative; }
   }
 </style>
 </head>
 <body>
 
-<div class="site" id="site">
+<!-- WIDOK PUBLICZNY APLIKACJI -->
+<div class="site-wrapper" id="siteContainer">
   <nav class="nav">
     <div class="brand">
       <div class="brand-mark">M</div>
       <div class="brand-name">MKMK</div>
     </div>
-    <div class="nav-links">
-      <span>Kolekcja</span><span>O Nas</span><span>Tablica</span><span>Kontakt</span>
+    <ul class="nav-links">
+      <li class="nav-item active" onclick="switchView('home')">Strona Główna</li>
+      <li class="nav-item" onclick="switchView('topki')">Topki Graczy</li>
+      <li class="nav-item" onclick="switchView('turnieje')">Turnieje</li>
+      <li class="nav-item" onclick="switchView('strefa')">Strefa Klubu</li>
+    </ul>
+    <div id="authZone">
+      <button class="btn" onclick="openModal('loginModal')">Logowanie</button>
     </div>
   </nav>
 
-  <section class="hero">
-    <div>
-      <div class="eyebrow">Premium · Edition 2026</div>
-      <h1>Sztuka <em>detalu</em>.<br/>Luksus w każdej linii.</h1>
-      <p>Witaj na ekskluzywnej tablicy ogłoszeń MKMK. Dołącz do społeczności i zostaw swój ślad — każdy wpis pojawia się natychmiast u wszystkich gości.</p>
-      <button class="btn btn-solid" onclick="document.getElementById('newEntry').focus()">Dodaj wpis →</button>
+  <!-- ZAKŁADKA: STRONA GŁÓWNA -->
+  <main class="container active" id="view-home">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1>Sztuka <em>rywalizacji</em>.<br>Luksus w gamingu.</h1>
+        <p>Witaj w elitarnej strefie MKMK. Śledź statystyki, sprawdzaj wyniki na żywo, oglądaj spektakularne akcje i bierz udział w profesjonalnych turniejach.</p>
+        <button class="btn btn-solid" onclick="switchView('topki')">Zobacz Rankingi →</button>
+      </div>
+      <div class="live-card">
+        <div class="card-head">
+          <h3>Ogłoszenia Klubu</h3>
+          <div class="pulse-dot"></div>
+        </div>
+        <div class="form-row">
+          <input type="text" id="shoutInput" class="input" placeholder="Napisz coś na żywo..." maxlength="120">
+          <button class="btn btn-solid" onclick="sendShout()">Wyślij</button>
+        </div>
+        <div class="feed-box" id="shoutFeed">Ładowanie tablicy ogłoszeń...</div>
+      </div>
     </div>
+  </main>
 
-    <div class="hero-card">
-      <div class="feed-title">
-        <h3>Tablica na żywo</h3>
-        <span class="dot" title="Połączono"></span>
-      </div>
-      <div class="add-row">
-        <input id="newEntry" class="input" placeholder="Napisz coś pięknego..." maxlength="280"/>
-        <button class="btn btn-solid" onclick="addPublicEntry()">Dodaj</button>
-      </div>
-      <div id="publicFeed" class="feed">
-        <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Ładowanie wpisów...</div>
-      </div>
+  <!-- ZAKŁADKA: TOPKI GRACZY -->
+  <section class="container" id="view-topki">
+    <div class="sub-tabs">
+      <button class="sub-btn active" id="tab-btn-main" onclick="switchTopTable('main')">Topka Główna</button>
+      <button class="sub-btn" id="tab-btn-faceit" onclick="switchTopTable('faceit')">Topka FACEIT</button>
+      <button class="sub-btn" id="tab-btn-events" onclick="switchTopTable('events')">Topka Punktowa (Eventy)</button>
+    </div>
+    <div style="overflow-x: auto;">
+      <table class="luxury-table" id="topTableContent">
+        <!-- Generowane dynamicznie przez JS -->
+      </table>
     </div>
   </section>
 
-  <footer class="footer">
-    <div>© 2026 MKMK — Wszystkie prawa zastrzeżone</div>
-    <div class="lock" title="Strefa prywatna" onclick="openLogin()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+  <!-- ZAKŁADKA: TURNIEJE (DRABINKA) -->
+  <section class="container" id="view-turnieje">
+    <h2 style="font-size:36px; margin-bottom: 8px;">Drabinka Mistrzostw MKMK</h2>
+    <p style="color: var(--muted); margin-bottom: 30px; font-size:14px;">Aktualne wyniki turnieju na żywo.</p>
+    <div class="bracket-container" id="bracketDisplay">
+      <!-- Generowane dynamicznie przez JS -->
     </div>
-  </footer>
+  </section>
+
+  <!-- ZAKŁADKA: STREFA KLUBU (KLIPY) -->
+  <section class="container" id="view-strefa">
+    <h2 style="font-size:36px; margin-bottom: 24px;">Najlepsze Klipy</h2>
+    <div class="clips-grid" id="clipsDisplay">
+      <!-- Generowane dynamicznie przez JS -->
+    </div>
+  </section>
 </div>
 
-<div class="modal-bg" id="loginModal">
-  <div class="modal">
-    <h2>Panel Administratora</h2>
-    <p>Wprowadź hasło aby uzyskać dostęp do zarządzania.</p>
-    <input id="loginPass" type="password" class="input" placeholder="Hasło" onkeydown="if(event.key==='Enter')tryLogin()"/>
-    <div class="actions">
-      <button class="btn-ghost" onclick="closeLogin()">Anuluj</button>
-      <button class="btn btn-solid" onclick="tryLogin()">Zaloguj</button>
+<!-- WIDOK PANELU ADMINISTRATORA -->
+<div class="admin-view" id="adminContainer">
+  <aside class="admin-sidebar">
+    <div class="admin-menu-top">
+      <!-- LEWY GÓRNY RÓG: USTAWIENIA PANELU -->
+      <div class="admin-settings-trigger" id="adminSetTrigger" onclick="switchAdminSec('settings')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Ustawienia Panelu
+      </div>
+      <!-- ŚRODEK: NAWIGACJA PANELU -->
+      <ul class="admin-nav-list">
+        <li class="admin-nav-item active" id="asec-btn-users" onclick="switchAdminSec('users')">Zarządzanie Kontami</li>
+        <li class="admin-nav-item" id="asec-btn-topki" onclick="switchAdminSec('topki')">Edycja Rankingów</li>
+        <li class="admin-nav-item" id="asec-btn-brackets" onclick="switchAdminSec('brackets')">Zarządzanie Drabinką</li>
+        <li class="admin-nav-item" id="asec-btn-clips" onclick="switchAdminSec('clips')">Dodawanie Klipów</li>
+      </ul>
     </div>
-  </div>
-</div>
-
-<div class="modal-bg" id="editModal">
-  <div class="modal">
-    <h2>Edytuj wpis</h2>
-    <p>Wprowadź zmiany i zapisz.</p>
-    <textarea id="editText" class="input"></textarea>
-    <label class="checkbox" style="margin-top:12px"><input type="checkbox" id="editPriority"/> Priorytet (wyróżniony)</label>
-    <div class="actions">
-      <button class="btn-ghost" onclick="closeEdit()">Anuluj</button>
-      <button class="btn btn-solid" onclick="saveEdit()">Zapisz</button>
-    </div>
-  </div>
-</div>
-
-<div class="admin" id="admin">
-  <aside class="sidebar">
-    <div class="side-brand">
-      <div class="brand-mark">M</div>
-      <div class="t">MKMK · ADMIN</div>
-    </div>
-    <div class="side-item active">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-      Dashboard
-    </div>
-    <div class="side-item" onclick="document.getElementById('adminNew').focus()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Nowy wpis
-    </div>
-    <div class="side-spacer"></div>
-    <div class="side-item logout" onclick="logout()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    <!-- LEWY DOLNY RÓG: LOGOUT / WYJDŹ Z PANELU -->
+    <div class="admin-logout-btn" onclick="logoutAdmin()">
       Wyjdź z panelu
     </div>
   </aside>
 
-  <main class="main">
-    <div class="main-head">
-      <div>
-        <div class="sub">Zarządzanie · Live</div>
-        <h1>Dashboard</h1>
-      </div>
-      <div class="sub" id="clock"></div>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><div class="l">Wszystkie wpisy</div><div class="v" id="statTotal">0</div></div>
-      <div class="stat"><div class="l">Priorytetowe</div><div class="v" id="statPrio">0</div></div>
-      <div class="stat"><div class="l">Status bazy</div><div class="v" style="font-size:22px;letter-spacing:2px">● POŁĄCZONO</div></div>
-    </div>
-
-    <div class="add-panel">
-      <h3>Dodaj nowy wpis</h3>
-      <div class="row">
-        <input id="adminNew" class="input" placeholder="Treść ogłoszenia..." maxlength="280" onkeydown="if(event.key==='Enter')adminAdd()"/>
-        <label class="checkbox"><input type="checkbox" id="adminPrio"/> Priorytet</label>
-        <button class="btn btn-solid" onclick="adminAdd()">Opublikuj</button>
+  <main class="admin-content">
+    <!-- SEKCOJA: USTAWIENIA PANELU -->
+    <div class="admin-sec" id="asec-settings">
+      <h2 style="font-size:32px; margin-bottom: 20px;">Ustawienia Ogólne Klubu</h2>
+      <div class="live-card" style="max-width:500px;">
+        <div class="form-group">
+          <label>Nazwa Główna Serwisu</label>
+          <input type="text" class="input" value="MKMK Premium Club" readonly />
+        </div>
+        <div class="form-group">
+          <label>Status Serwera Bazy Danych</label>
+          <div style="color:var(--gold); font-size:14px; font-weight:600; margin-top:5px;">● Firebase Realtime Database: POŁĄCZONO</div>
+        </div>
+        <button class="btn btn-solid" style="margin-top:10px;" onclick="makeToast('Zapisano', 'Ustawienia systemowe zaktualizowane', 'success')">Zapisz konfigurację</button>
       </div>
     </div>
 
-    <div class="table">
-      <div class="table-head">
-        <div>Treść</div><div>Data</div><div style="text-align:right">Akcje</div>
+    <!-- SEKCJA: ZARZĄDZANIE KONTAMI -->
+    <div class="admin-sec active" id="asec-users">
+      <h2 style="font-size:32px; margin-bottom: 20px;">Zarządzanie Użytkownikami</h2>
+      <div class="live-card" style="margin-bottom:30px;">
+        <h3 style="margin-bottom:15px; font-size:20px; color:var(--gold);">Dodaj Nowego Użytkownika</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Pseudonim / Nick</label><input type="text" id="addUserNick" class="input" placeholder="np. Neo"></div>
+          <div class="form-group"><label>Ranga klubowa</label><input type="text" id="addUserRole" class="input" placeholder="np. Elita / Admin"></div>
+          <div class="form-group"><label>Status konta</label><select id="addUserStatus" class="select"><option value="Aktywny">Aktywny</option><option value="Zawieszony">Zawieszony</option></select></div>
+        </div>
+        <button class="btn btn-solid" onclick="createUser()">Utwórz Konto</button>
       </div>
-      <div id="adminList"><div class="empty">Brak wpisów</div></div>
+      <table class="luxury-table">
+        <thead><tr><th>Nick</th><th>Ranga</th><th>Status</th><th>Akcje</th></tr></thead>
+        <tbody id="adminUsersList"></tbody>
+      </table>
+    </div>
+
+    <!-- SEKCJA: EDYCJA RANKINGÓW -->
+    <div class="admin-sec" id="asec-topki">
+      <h2 style="font-size:32px; margin-bottom: 20px;">Zarządzanie Tabelami Wyników</h2>
+      <div class="live-card">
+        <h3 style="margin-bottom:15px; font-size:20px; color:var(--gold);">Dodaj lub Zaktualizuj Statystykę Gracza</h3>
+        <div class="form-row" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom:15px;">
+          <div class="form-group">
+            <label>Wybierz tabelę docelową</label>
+            <select id="topTargetTable" class="select" onchange="adjustFormFields()">
+              <option value="main">Topka Główna</option>
+              <option value="faceit">Topka FACEIT</option>
+              <option value="events">Topka Punktowa (Eventy)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Nick gracza</label><input type="text" id="topPlayerNick" class="input" placeholder="Nick"></div>
+          <div class="form-group" id="dynamicFieldGroup"><label id="dynamicLabel">Punkty Klubu</label><input type="number" id="topVal1" class="input" placeholder="Wartość"></div>
+        </div>
+        <div class="form-row" id="extraFieldsRow" style="margin-bottom:15px;">
+          <div class="form-group"><label>Dodatkowe info 1 (np. Mecze/Winrate %)</label><input type="text" id="topVal2" class="input" placeholder="np. 450"></div>
+          <div class="form-group"><label>Dodatkowe info 2 (np. Ranga/Status)</label><input type="text" id="topVal3" class="input" placeholder="np. 64%"></div>
+        </div>
+        <button class="btn btn-solid" onclick="saveTopData()">Zapisz Rekord</button>
+      </div>
+      <h3 style="margin-top:30px; margin-bottom:15px; font-size:22px;">Podgląd aktualnych danych z bazy</h3>
+      <div style="display:flex; gap:10px; margin-bottom:15px;">
+        <button class="btn btn-solid" onclick="loadAdminTopPreview('main')">Lista: Główna</button>
+        <button class="btn btn-solid" onclick="loadAdminTopPreview('faceit')">Lista: FACEIT</button>
+        <button class="btn btn-solid" onclick="loadAdminTopPreview('events')">Lista: Eventy</button>
+      </div>
+      <table class="luxury-table">
+        <thead><tr><th>Nick</th><th>Dane 1</th><th>Dane 2</th><th>Dane 3</th><th>Opcje</th></tr></thead>
+        <tbody id="adminTopList"></tbody>
+      </table>
+    </div>
+
+    <!-- SEKCJA: ZARZĄDZANIE DRABINKĄ -->
+    <div class="admin-sec" id="asec-brackets">
+      <h2 style="font-size:32px; margin-bottom: 20px;">Kontrola Drabinki Turniejowej (8 Graczy)</h2>
+      <div class="live-card">
+        <p style="color:var(--muted); margin-bottom:20px;">Wpisz nazwy zawodników oraz ich wyniki. Pola oznaczone jako wygrane zostaną wyróżnione automatycznie na stronie głównej.</p>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+          <!-- MECZ 1 -->
+          <div style="border:1px solid var(--line); padding:15px; border-radius:8px;">
+            <h4 style="color:var(--gold); margin-bottom:10px;">Mecz 1 (Ćwierćfinał A)</h4>
+            <div class="form-row"><input type="text" id="b_m1_p1" class="input" placeholder="Gracz 1"><input type="text" id="b_m1_s1" class="input" placeholder="Wynik"></div>
+            <div class="form-row" style="margin-top:5px;"><input type="text" id="b_m1_p2" class="input" placeholder="Gracz 2"><input type="text" id="b_m1_s2" class="input" placeholder="Wynik"></div>
+          </div>
+          <!-- MECZ 2 -->
+          <div style="border:1px solid var(--line); padding:15px; border-radius:8px;">
+            <h4 style="color:var(--gold); margin-bottom:10px;">Mecz 2 (Ćwierćfinał B)</h4>
+            <div class="form-row"><input type="text" id="b_m2_p1" class="input" placeholder="Gracz 1"><input type="text" id="b_m2_s1" class="input" placeholder="Wynik"></div>
+            <div class="form-row" style="margin-top:5px;"><input type="text" id="b_m2_p2" class="input" placeholder="Gracz 2"><input type="text" id="b_m2_s2" class="input" placeholder="Wynik"></div>
+          </div>
+          <!-- MECZ 3 -->
+          <div style="border:1px solid var(--line); padding:15px; border-radius:8px;">
+            <h4 style="color:var(--gold); margin-bottom:10px;">Mecz 3 (Ćwierćfinał C)</h4>
+            <div class="form-row"><input type="text" id="b_m3_p1" class="input" placeholder="Gracz 1"><input type="text" id="b_m3_s1" class="input" placeholder="Wynik"></div>
+            <div class="form-row" style="margin-top:5px;"><input type="text" id="b_m3_p2" class="input" placeholder="Gracz 2"><input type="text" id="b_m3_s2" class="input" placeholder="Wynik"></div>
+          </div>
+          <!-- MECZ 4 -->
+          <div style="border:1px solid var(--line); padding:15px; border-radius:8px;">
+            <h4 style="color:var(--gold); margin-bottom:10px;">Mecz 4 (Ćwierćfinał D)</h4>
+            <div class="form-row"><input type="text" id="b_m4_p1" class="input" placeholder="Gracz 1"><input type="text" id="b_m4_s1" class="input" placeholder="Wynik"></div>
+            <div class="form-row" style="margin-top:5px;"><input type="text" id="b_m4_p2" class="input" placeholder="Gracz 2"><input type="text" id="b_m4_s2" class="input" placeholder="Wynik"></div>
+          </div>
+          <!-- PÓŁFINAŁY -->
+          <div style="border:1px solid var(--line); padding:15px; border-radius:8px; grid-column: span 2;">
+            <h4 style="color:var(--gold); margin-bottom:10px;">Półfinały (A & B)</h4>
+            <div class="form-row"><input type="text" id="b_m5_p1" class="input" placeholder="Półfinalista 1"><input type="text" id="b_m5_s1" class="input" placeholder="Wynik"></div>
+            <div class="form-row" style="margin-top:5px;"><input type="text" id="b_m5_p2" class="input" placeholder="Półfinalista 2"><input type="text" id="b_m5_s2" class="input" placeholder="Wynik"></div>
+            <hr style="border:none; border-top:1px solid var(--line); margin:10px 0;">
+            <div class="form-row"><input type="text" id="b_m6_p1" class="input" placeholder="Półfinalista 3"><input type="text" id="b_m6_s1" class="input" placeholder="Wynik"></div>
+            <div class="form-row" style="margin-top:5px;"><input type="text" id="b_m6_p2" class="input" placeholder="Półfinalista 4"><input type="text" id="b_m6_s2" class="input" placeholder="Wynik"></div>
+          </div>
+          <!-- FINAŁ -->
+          <div style="border:1px solid var(--line); padding:15px; border-radius:8px;">
+            <h4 style="color:var(--gold); margin-bottom:10px;">Wielki Finał</h4>
+            <div class="form-row"><input type="text" id="b_m7_p1" class="input" placeholder="Finalista 1"><input type="text" id="b_m7_s1" class="input" placeholder="Wynik"></div>
+            <div class="form-row" style="margin-top:5px;"><input type="text" id="b_m7_p2" class="input" placeholder="Finalista 2"><input type="text" id="b_m7_s2" class="input" placeholder="Wynik"></div>
+          </div>
+        </div>
+        <button class="btn btn-solid" style="margin-top:20px;" onclick="saveBracketData()">Aktualizuj Całą Drabinkę Live</button>
+      </div>
+    </div>
+
+    <!-- SEKCJA: DODAWANIE KLIPÓW -->
+    <div class="admin-sec" id="asec-clips">
+      <h2 style="font-size:32px; margin-bottom: 20px;">Dodawanie Klipów Multimedialnych</h2>
+      <div class="live-card" style="margin-bottom:30px;">
+        <div class="form-group"><label>Tytuł Akcji / Opis klipu</label><input type="text" id="clipTitle" class="input" placeholder="np. Niesamowity Ace 1v5 na boksach"></div>
+        <div class="form-group"><label>Autor Klipu (Nick)</label><input type="text" id="clipAuthor" class="input" placeholder="np. Snax"></div>
+        <div class="form-group"><label>Link URL Klipu (Wspierane Direct MP4, YouTube Embed Embed, Twitch)</label><input type="text" id="clipUrl" class="input" placeholder="https://www.youtube.com/embed/kod-wideo lub link .mp4"></div>
+        <button class="btn btn-solid" onclick="addClip()">Opublikuj Klip</button>
+      </div>
+      <table class="luxury-table">
+        <thead><tr><th>Tytuł</th><th>Autor</th><th>URL</th><th>Akcja</th></tr></thead>
+        <tbody id="adminClipsList"></tbody>
+      </table>
     </div>
   </main>
 </div>
 
-<div class="toasts" id="toasts"></div>
+<!-- MODAL LOGOWANIA -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-window">
+    <h2>Zaloguj do Panelu</h2>
+    <p>Dostęp autoryzowany dla członków i administracji MKMK.</p>
+    <div class="form-group"><label>Hasło dostępowe</label><input type="password" id="loginKey" class="input" placeholder="Wpisz tajny klucz..."></div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('loginModal')">Anuluj</button>
+      <button class="btn btn-solid" onclick="attemptLogin()">Autoryzuj</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastBox"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, push, onValue, remove, update }
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove, set, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-// ====== UZUPEŁNIONA KONFIGURACJĘ FIREBASE ======
+// ====== INTEGRACJA Z TWOIM FIREBASE ======
 const firebaseConfig = {
   apiKey: "AIzaSyAe6_0DkyqxC4FmMvP4rdY5-lLKUyuv7UY",
   authDomain: "mkmk-618e7.firebaseapp.com",
@@ -272,157 +406,281 @@ const firebaseConfig = {
   messagingSenderId: "942857686875",
   appId: "1:942857686875:web:fb5fb7573319a69430d47e"
 };
-// ====== HASŁO ADMINA ======
-const ADMIN_PASSWORD = "mkmkadmin123";
+const ADMIN_SECRET = "mkmkadmin123";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const entriesRef = ref(db, "entries");
 
-let currentEntries = [];
-let editingId = null;
+// STAN APLIKACJI
+let activeTab = 'main';
+let cacheUsers = [], cacheTopMain = [], cacheTopFaceit = [], cacheTopEvents = [], cacheClips = [];
 
-function toast(title, body, type="info"){
-  const el = document.createElement("div");
-  el.className = "toast " + type;
-  el.innerHTML = `<div class="title">${title}</div><div class="body">${body}</div>`;
-  document.getElementById("toasts").appendChild(el);
-  setTimeout(()=>{ el.classList.add("out"); setTimeout(()=>el.remove(), 250); }, 3200);
-}
+// ELEMENTY SYSTEMOWE & FUNKCJE POMOCNICZE
+window.makeToast = (title, body, type = 'info') => {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  if(type === 'success') t.style.borderLeftColor = 'var(--gold)';
+  if(type === 'error') t.style.borderLeftColor = 'var(--red)';
+  t.innerHTML = `<strong style="display:block; color:var(--gold); margin-bottom:2px;">${title}</strong><span>${body}</span>`;
+  document.getElementById('toastBox').appendChild(t);
+  setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(20px)'; t.style.transition = 'all 0.3s'; setTimeout(() => t.remove(), 300); }, 3000);
+};
 
-function renderPublic(){
-  const feed = document.getElementById("publicFeed");
-  if(!currentEntries.length){
-    feed.innerHTML = `<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Bądź pierwszy — dodaj wpis ✨</div>`;
-    return;
+window.openModal = (id) => document.getElementById(id).classList.add('active');
+window.closeModal = (id) => document.getElementById(id).classList.remove('active');
+
+// SPA VIEW CONTROL
+window.switchView = (viewId) => {
+  document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('active'));
+  document.getElementById('view-' + viewId).classList.add('active');
+  event?.target?.classList?.add('active');
+  if(viewId === 'topki') renderPublicTopTable();
+};
+
+window.switchAdminSec = (secId) => {
+  document.querySelectorAll('.admin-sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('adminSetTrigger').classList.remove('active');
+  
+  document.getElementById('asec-' + secId).classList.add('active');
+  if(secId === 'settings') document.getElementById('adminSetTrigger').classList.add('active');
+  else document.getElementById('asec-btn-' + secId).classList.add('active');
+
+  if(secId === 'users') loadAdminUsers();
+  if(secId === 'topki') loadAdminTopPreview('main');
+  if(secId === 'clips') loadAdminClips();
+  if(secId === 'brackets') loadAdminBrackets();
+};
+
+// AUTORYZACJA I SESJA
+window.attemptLogin = () => {
+  const k = document.getElementById('loginKey').value;
+  if(k === ADMIN_SECRET) {
+    localStorage.setItem('mkmk_admin_session', 'true');
+    buildAdminUI();
+  } else {
+    makeToast('Błąd autoryzacji', 'Nieprawidłowe hasło', 'error');
   }
-  feed.innerHTML = currentEntries.map(e => `
-    <div class="entry ${e.priority?'priority':''}">
-      <div>
-        ${e.priority?'<span class="priority-tag">★ Priorytet</span>':''}
-        <span>${escapeHtml(e.text)}</span>
-        <div class="meta">${formatDate(e.ts)}</div>
-      </div>
-    </div>
-  `).join("");
+};
+
+window.logoutAdmin = () => {
+  localStorage.removeItem('mkmk_admin_session');
+  document.getElementById('adminContainer').classList.remove('active');
+  document.getElementById('siteContainer').style.display = 'flex';
+  document.getElementById('authZone').innerHTML = `<button class="btn" onclick="openModal('loginModal')">Logowanie</button>`;
+  switchView('home');
+  makeToast('Wylogowano', 'Opuszczono panel administratora', 'info');
+};
+
+function buildAdminUI() {
+  closeModal('loginModal');
+  document.getElementById('siteContainer').style.display = 'none';
+  document.getElementById('adminContainer').classList.add('active');
+  document.getElementById('authZone').innerHTML = `<button class="btn btn-solid" onclick="switchAdminSec('users')">Panel Admina</button>`;
+  switchAdminSec('users');
 }
 
-function renderAdmin(){
-  const list = document.getElementById("adminList");
-  document.getElementById("statTotal").textContent = currentEntries.length;
-  document.getElementById("statPrio").textContent = currentEntries.filter(e=>e.priority).length;
-  if(!currentEntries.length){
-    list.innerHTML = `<div class="empty">Brak wpisów w bazie</div>`;
-    return;
-  }
-  list.innerHTML = currentEntries.map(e => `
-    <div class="row-item">
-      <div class="row-text">
-        ${e.priority?'<span class="priority-tag">★</span>':''}
-        ${escapeHtml(e.text)}
-      </div>
-      <div class="row-date">${formatDate(e.ts)}</div>
-      <div class="row-actions">
-        <button class="icon-btn" title="Edytuj" onclick="window.__edit('${e.id}')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </button>
-        <button class="icon-btn danger" title="Usuń" onclick="window.__del('${e.id}')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 01-2 2H9a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a2 2 0 012-2h2a2 2 0 012 2v2"/></svg>
-        </button>
-      </div>
+// STRONA GŁÓWNA: TABLICA OGŁOSZEŃ (SHOUTBOX)
+window.sendShout = async () => {
+  const i = document.getElementById('shoutInput');
+  if(!i.value.trim()) return;
+  await push(ref(db, 'shoutbox'), { text: i.value.trim(), ts: Date.now() });
+  i.value = '';
+};
+
+onValue(ref(db, 'shoutbox'), s => {
+  const data = s.val() || {};
+  const sorted = Object.values(data).sort((a,b) => b.ts - a.ts);
+  document.getElementById('shoutFeed').innerHTML = sorted.map(m => `
+    <div class="msg-item">
+      <div>${escapeHtml(m.text)}</div>
+      <div class="msg-meta">${new Date(m.ts).toLocaleTimeString()}</div>
     </div>
-  `).join("");
-}
-
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function formatDate(ts){if(!ts)return"—";const d=new Date(ts);return d.toLocaleString("pl-PL",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})}
-
-onValue(entriesRef, snap => {
-  const val = snap.val() || {};
-  currentEntries = Object.entries(val).map(([id,v])=>({id,...v}))
-    .sort((a,b)=>(b.ts||0)-(a.ts||0));
-  renderPublic();
-  if(document.getElementById("admin").classList.contains("show")) renderAdmin();
-}, err => {
-  toast("Błąd bazy", err.message, "error");
+  `).join('');
 });
 
-window.addPublicEntry = async () => {
-  const input = document.getElementById("newEntry");
-  const text = input.value.trim();
-  if(!text){ toast("Uwaga","Wpis nie może być pusty","error"); return; }
-  try{
-    await push(entriesRef, { text, priority:false, ts: Date.now() });
-    input.value = "";
-    toast("Dodano","Twój wpis pojawił się na tablicy","success");
-  }catch(e){ toast("Błąd", e.message, "error"); }
+// RANKINGI: LOGIKA PUBLICZNA I AKTUALIZACJE Z BAZY
+window.switchTopTable = (tableType) => {
+  activeTab = tableType;
+  document.querySelectorAll('.sub-tabs .sub-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-btn-${tableType}`).classList.add('active');
+  renderPublicTopTable();
 };
 
-window.openLogin = ()=>{ document.getElementById("loginModal").classList.add("show"); setTimeout(()=>document.getElementById("loginPass").focus(),50); };
-window.closeLogin = ()=>{ document.getElementById("loginModal").classList.remove("show"); document.getElementById("loginPass").value=""; };
-window.tryLogin = ()=>{
-  const v = document.getElementById("loginPass").value;
-  if(v === ADMIN_PASSWORD){
-    closeLogin();
-    document.getElementById("site").style.display = "none";
-    document.getElementById("admin").classList.add("show");
-    renderAdmin();
-    toast("Witaj","Zalogowano jako Administrator","success");
+function listenToTopTables() {
+  onValue(ref(db, 'top_main'), s => { cacheTopMain = Object.entries(s.val() || {}).map(([id, v]) => ({id, ...v})).sort((a,b)=>b.v1 - a.v1); if(activeTab==='main') renderPublicTopTable(); });
+  onValue(ref(db, 'top_faceit'), s => { cacheTopFaceit = Object.entries(s.val() || {}).map(([id, v]) => ({id, ...v})).sort((a,b)=>b.v1 - a.v1); if(activeTab==='faceit') renderPublicTopTable(); });
+  onValue(ref(db, 'top_events'), s => { cacheTopEvents = Object.entries(s.val() || {}).map(([id, v]) => ({id, ...v})).sort((a,b)=>b.v1 - a.v1); if(activeTab==='events') renderPublicTopTable(); });
+}
+
+function renderPublicTopTable() {
+  const el = document.getElementById('topTableContent');
+  if(activeTab === 'main') {
+    el.innerHTML = `<tr><th>Miejsce</th><th>Gracz</th><th>Punkty Klubu</th><th>Ranga</th><th>Status</th></tr>` + cacheTopMain.map((g, i) => `
+      <tr><td><span class="rank-badge ${i===0?'rank-1':''}">${i+1}</span></td><td><strong>${escapeHtml(g.nick)}</strong></td><td><span style="color:var(--gold)">${g.v1} pkt</span></td><td>${escapeHtml(g.v2 || 'Gracz')}</td><td>${escapeHtml(g.v3 || 'Aktywny')}</td></tr>
+    `).join('');
+  } else if(activeTab === 'faceit') {
+    el.innerHTML = `<tr><th>Miejsce</th><th>Gracz</th><th>Elo</th><th>Mecze</th><th>Winrate %</th></tr>` + cacheTopFaceit.map((g, i) => `
+      <tr><td><span class="rank-badge ${i===0?'rank-1':''}">${i+1}</span></td><td><strong>${escapeHtml(g.nick)}</strong></td><td><span style="color:var(--gold)">${g.v1}</span></td><td>${g.v2 || '0'}</td><td>${g.v3 || '50%'}</td></tr>
+    `).join('');
   } else {
-    toast("Odmowa dostępu","Nieprawidłowe hasło","error");
+    el.innerHTML = `<tr><th>Miejsce</th><th>Gracz</th><th>Punkty Eventowe</th><th>Wygrane Turnieje</th><th>Aktywność</th></tr>` + cacheTopEvents.map((g, i) => `
+      <tr><td><span class="rank-badge ${i===0?'rank-1':''}">${i+1}</span></td><td><strong>${escapeHtml(g.nick)}</strong></td><td><span style="color:var(--gold)">${g.v1}</span></td><td>${g.v2 || '0'}</td><td>${g.v3 || 'Wysoka'}</td></tr>
+    `).join('');
+  }
+}
+
+// DRABINKA: WIZUALIZACJA I OBSŁUGA
+onValue(ref(db, 'bracket'), s => {
+  const b = s.val() || {};
+  const match = (id) => ({ p1: b[`${id}_p1`]||'?', s1: b[`${id}_s1`]||'0', p2: b[`${id}_p2`]||'?', s2: b[`${id}_s2`]||'0' });
+  
+  const m1 = match('m1'), m2 = match('m2'), m3 = match('m3'), m4 = match('m4');
+  const m5 = match('m5'), m6 = match('m6'), m7 = match('m7');
+
+  document.getElementById('bracketDisplay').innerHTML = `
+    <div class="bracket-round">
+      ${renderMatchBox(m1)}${renderMatchBox(m2)}${renderMatchBox(m3)}${renderMatchBox(m4)}
+    </div>
+    <div class="bracket-round">
+      ${renderMatchBox(m5)}${renderMatchBox(m6)}
+    </div>
+    <div class="bracket-round">
+      ${renderMatchBox(m7)}
+    </div>
+  `;
+});
+
+function renderMatchBox(m) {
+  const w1 = parseInt(m.s1) > parseInt(m.s2);
+  const w2 = parseInt(m.s2) > parseInt(m.s1);
+  return `
+    <div class="bracket-match">
+      <div class="bracket-slot ${w1?'winner':''} Orion"><span>${escapeHtml(m.p1)}</span><strong>${m.s1}</strong></div>
+      <div class="bracket-slot ${w2?'winner':''} Orion"><span>${escapeHtml(m.p2)}</span><strong>${m.s2}</strong></div>
+    </div>
+  `;
+}
+
+// STREFA KLUBU: KLIPY WIDEO
+onValue(ref(db, 'clips'), s => {
+  cacheClips = Object.entries(s.val() || {}).map(([id, v]) => ({id, ...v}));
+  document.getElementById('clipsDisplay').innerHTML = cacheClips.map(c => `
+    <div class="clip-card">
+      <div class="clip-video">
+        ${c.url.includes('embed') ? `<iframe src="${c.url}" allowfullscreen></iframe>` : `<video src="${c.url}" controls></video>`}
+      </div>
+      <div class="clip-info">
+        <h3>${escapeHtml(c.title)}</h3>
+        <div class="clip-meta">Autor: ${escapeHtml(c.author)}</div>
+      </div>
+    </div>
+  `).join('');
+});
+
+// ADMINISTRACJA: LOGIKA PANELU ZARZĄDZANIA
+window.createUser = async () => {
+  const nick = document.getElementById('addUserNick').value.trim();
+  const role = document.getElementById('addUserRole').value.trim();
+  const status = document.getElementById('addUserStatus').value;
+  if(!nick || !role) return;
+  await push(ref(db, 'users'), { nick, role, status });
+  document.getElementById('addUserNick').value = ''; document.getElementById('addUserRole').value = '';
+  makeToast('Sukces', 'Utworzono profil użytkownika', 'success');
+};
+
+function loadAdminUsers() {
+  onValue(ref(db, 'users'), s => {
+    cacheUsers = Object.entries(s.val() || {}).map(([id, v]) => ({id, ...v}));
+    document.getElementById('adminUsersList').innerHTML = cacheUsers.map(u => `
+      <tr><td><strong>${escapeHtml(u.nick)}</strong></td><td>${escapeHtml(u.role)}</td><td>${u.status}</td><td><button class="btn btn-danger" style="padding:4px 10px; font-size:10px;" onclick="deleteRecord('users','${u.id}')">Usuń</button></td></tr>
+    `).join('');
+  });
+}
+
+window.adjustFormFields = () => {
+  const t = document.getElementById('topTargetTable').value;
+  const lbl = document.getElementById('dynamicLabel');
+  if(t === 'main') lbl.textContent = "Punkty Klubu";
+  if(t === 'faceit') lbl.textContent = "FACEIT ELO";
+  if(t === 'events') lbl.textContent = "Punkty Eventowe";
+};
+
+window.saveTopData = async () => {
+  const table = document.getElementById('topTargetTable').value;
+  const nick = document.getElementById('topPlayerNick').value.trim();
+  const v1 = parseInt(document.getElementById('topVal1').value) || 0;
+  const v2 = document.getElementById('topVal2').value.trim();
+  const v3 = document.getElementById('topVal3').value.trim();
+  if(!nick) return;
+  await push(ref(db, `top_${table}`), { nick, v1, v2, v3 });
+  makeToast('Zapisano', 'Dodano rekord do rankingu', 'success');
+};
+
+window.loadAdminTopPreview = (table) => {
+  const targetRef = ref(db, `top_${table}`);
+  onValue(targetRef, s => {
+    const records = Object.entries(s.val() || {}).map(([id, v]) => ({id, ...v}));
+    document.getElementById('adminTopList').innerHTML = records.map(r => `
+      <tr><td>${escapeHtml(r.nick)}</td><td>${r.v1}</td><td>${escapeHtml(r.v2||'—')}</td><td>${escapeHtml(r.v3||'—')}</td><td><button class="btn btn-danger" style="padding:4px 10px; font-size:10px;" onclick="deleteRecord('top_${table}','${r.id}')">Usuń</button></td></tr>
+    `).join('');
+  });
+};
+
+window.saveBracketData = async () => {
+  const updatePayload = {};
+  for(let i=1; i<=7; i++) {
+    updatePayload[`m${i}_p1`] = document.getElementById(`b_m${i}_p1`).value;
+    updatePayload[`m${i}_s1`] = document.getElementById(`b_m${i}_s1`).value || '0';
+    updatePayload[`m${i}_p2`] = document.getElementById(`b_m${i}_p2`).value;
+    updatePayload[`m${i}_s2`] = document.getElementById(`b_m${i}_s2`).value || '0';
+  }
+  await update(ref(db, 'bracket'), updatePayload);
+  makeToast('Zsynchronizowano', 'Drabinka turniejowa została zaktualizowana', 'success');
+};
+
+function loadAdminBrackets() {
+  onValue(ref(db, 'bracket'), s => {
+    const d = s.val() || {};
+    for(let i=1; i<=7; i++) {
+      document.getElementById(`b_m${i}_p1`).value = d[`m${i}_p1`] || '';
+      document.getElementById(`b_m${i}_s1`).value = d[`m${i}_s1`] || '0';
+      document.getElementById(`b_m${i}_p2`).value = d[`m${i}_p2`] || '';
+      document.getElementById(`b_m${i}_s2`).value = d[`m${i}_s2`] || '0';
+    }
+  }, { onlyOnce: true });
+}
+
+window.addClip = async () => {
+  const title = document.getElementById('clipTitle').value.trim();
+  const author = document.getElementById('clipAuthor').value.trim();
+  const url = document.getElementById('clipUrl').value.trim();
+  if(!title || !url) return;
+  await push(ref(db, 'clips'), { title, author, url });
+  makeToast('Sukces', 'Klip został opublikowany', 'success');
+};
+
+function loadAdminClips() {
+  document.getElementById('adminClipsList').innerHTML = cacheClips.map(c => `
+    <tr><td>${escapeHtml(c.title)}</td><td>${escapeHtml(c.author)}</td><td style="font-size:11px; max-width:200px; overflow:hidden;">${c.url}</td><td><button class="btn btn-danger" style="padding:4px 10px; font-size:10px;" onclick="deleteRecord('clips','${c.id}')">Usuń</button></td></tr>
+  `).join('');
+}
+
+window.deleteRecord = async (path, id) => {
+  if(confirm('Na pewno usunąć ten rekord bezpowrotnie z bazy danych?')) {
+    await remove(ref(db, `${path}/${id}`));
+    makeToast('Usunięto', 'Rekord został wykasowany', 'info');
   }
 };
-window.logout = ()=>{
-  document.getElementById("admin").classList.remove("show");
-  document.getElementById("site").style.display = "";
-  toast("Wylogowano","Powrót do widoku publicznego","info");
-};
 
-window.adminAdd = async ()=>{
-  const i = document.getElementById("adminNew");
-  const p = document.getElementById("adminPrio");
-  const text = i.value.trim();
-  if(!text){ toast("Uwaga","Treść wymagana","error"); return; }
-  try{
-    await push(entriesRef, { text, priority:p.checked, ts: Date.now() });
-    i.value=""; p.checked=false;
-    toast("Opublikowano","Nowy wpis dodany do bazy","success");
-  }catch(e){ toast("Błąd", e.message, "error"); }
-};
+function escapeHtml(str) { return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
 
-window.__del = async (id) => {
-  if(!confirm("Usunąć wpis bezpowrotnie?")) return;
-  try{
-    await remove(ref(db, "entries/"+id));
-    toast("Usunięto","Pomyślnie usunięto wpis z bazy","success");
-  }catch(e){ toast("Błąd", e.message, "error"); }
-};
-
-window.__edit = (id) => {
-  const e = currentEntries.find(x=>x.id===id);
-  if(!e) return;
-  editingId = id;
-  document.getElementById("editText").value = e.text;
-  document.getElementById("editPriority").checked = !!e.priority;
-  document.getElementById("editModal").classList.add("show");
-};
-window.closeEdit = ()=>{ document.getElementById("editModal").classList.remove("show"); editingId=null; };
-window.saveEdit = async ()=>{
-  if(!editingId) return;
-  const text = document.getElementById("editText").value.trim();
-  const priority = document.getElementById("editPriority").checked;
-  if(!text){ toast("Uwaga","Treść nie może być pusta","error"); return; }
-  try{
-    await update(ref(db, "entries/"+editingId), { text, priority });
-    closeEdit();
-    toast("Zapisano","Wpis został zaktualizowany","success");
-  }catch(e){ toast("Błąd", e.message, "error"); }
-};
-
-setInterval(()=>{
-  const el = document.getElementById("clock");
-  if(el) el.textContent = new Date().toLocaleString("pl-PL");
-}, 1000);
+// SYSTEM START & AUTO-LOGIN DETECTOR
+listenToTopTables();
+if(localStorage.getItem('mkmk_admin_session') === 'true') {
+  buildAdminUI();
+}
 </script>
 </body>
 </html>
