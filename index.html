@@ -1,272 +1,428 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mkmk</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --surface: #1e293b;
-      --surface-2: #273449;
-      --primary: #14b8a6;
-      --primary-hover: #0d9488;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --border: #334155;
-      --radius: 14px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 24px 16px;
-      line-height: 1.5;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 560px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    header { text-align: center; padding: 8px 0; }
-
-    header h1 {
-      font-size: 2rem;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, var(--primary), #5eead4);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    header p { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-
-    .card h2 {
-      font-size: 1.1rem;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    form { display: flex; gap: 10px; flex-wrap: wrap; }
-
-    input[type="text"] {
-      flex: 1 1 220px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      color: var(--text);
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-
-    input[type="text"]:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
-    }
-
-    button {
-      background: var(--primary);
-      color: #04221f;
-      font-weight: 600;
-      font-size: 1rem;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 22px;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.05s;
-    }
-
-    button:hover { background: var(--primary-hover); }
-    button:active { transform: scale(0.97); }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    .status {
-      font-size: 0.85rem;
-      margin-top: 12px;
-      min-height: 18px;
-      color: var(--muted);
-    }
-    .status.error { color: #f87171; }
-    .status.success { color: #34d399; }
-
-    ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-
-    li {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 0.95rem;
-      word-break: break-word;
-      animation: fadeIn 0.25s ease;
-    }
-
-    li .time { display: block; color: var(--muted); font-size: 0.75rem; margin-top: 4px; }
-
-    .empty { color: var(--muted); font-style: italic; text-align: center; padding: 12px; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MKMK — Premium Dark Luxury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0c; --bg-2:#111114; --panel:#15151a; --panel-2:#1c1c22;
+    --line:#26262e; --line-2:#33333d;
+    --text:#ecead8; --muted:#8a8a95;
+    --gold:#c9a96e; --gold-2:#e6c98b; --gold-soft:#3a2f1c;
+    --red:#c8475a; --green:#5fb37a;
+    --shadow: 0 30px 80px -20px rgba(0,0,0,.6);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.5px;margin:0}
+  .site{min-height:100vh;display:flex;flex-direction:column;background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(201,169,110,.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(201,169,110,.06), transparent 60%),
+    var(--bg);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 40px;border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand-mark{width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:700}
+  .brand-name{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:6px}
+  .nav-links{display:flex;gap:28px;color:var(--muted);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+  .nav-links span{cursor:pointer;transition:color .2s}
+  .nav-links span:hover{color:var(--gold)}
+  .hero{flex:1;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;padding:80px 60px;align-items:center;max-width:1400px;margin:0 auto;width:100%}
+  .eyebrow{color:var(--gold);letter-spacing:6px;font-size:12px;text-transform:uppercase;margin-bottom:20px}
+  .hero h1{font-size:clamp(48px,6vw,84px);line-height:1.05}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero p{color:var(--muted);font-size:17px;line-height:1.7;max-width:520px;margin:24px 0 32px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:999px;border:1px solid var(--gold);color:var(--gold);background:transparent;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .25s}
+  .btn:hover{background:var(--gold);color:#111}
+  .btn-solid{background:var(--gold);color:#111}
+  .btn-solid:hover{background:var(--gold-2)}
+  .hero-card{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hero-card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 100% 0%, rgba(201,169,110,.12), transparent 60%);pointer-events:none}
+  .feed-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .feed-title h3{font-size:22px}
+  .feed-title .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+  .add-row{display:flex;gap:10px;margin-bottom:18px}
+  .input{flex:1;background:#0d0d11;border:1px solid var(--line);color:var(--text);padding:12px 14px;border-radius:10px;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
+  .input:focus{border-color:var(--gold)}
+  .feed{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow:auto;padding-right:6px}
+  .feed::-webkit-scrollbar{width:6px}
+  .feed::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:3px}
+  .entry{background:#0d0d11;border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;gap:14px;animation:fade .35s ease}
+  .entry .meta{color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+  .entry.priority{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,169,110,.06),transparent)}
+  .priority-tag{display:inline-block;font-size:10px;letter-spacing:2px;color:var(--gold);border:1px solid var(--gold);padding:2px 8px;border-radius:999px;margin-right:8px;text-transform:uppercase}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .footer{display:flex;justify-content:space-between;align-items:center;padding:24px 40px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;letter-spacing:1px}
+  .lock{opacity:.25;cursor:pointer;transition:all .25s;padding:8px;border-radius:50%}
+  .lock:hover{opacity:1;color:var(--gold);background:rgba(201,169,110,.08)}
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:50}
+  .modal-bg.show{display:flex;animation:fade .25s ease}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:36px;width:min(420px,90vw);box-shadow:var(--shadow)}
+  .modal h2{font-size:28px;margin-bottom:8px}
+  .modal p{color:var(--muted);font-size:13px;margin:0 0 20px}
+  .modal .actions{display:flex;gap:10px;margin-top:18px;justify-content:flex-end}
+  .btn-ghost{border:1px solid var(--line-2);color:var(--muted);background:transparent;padding:12px 20px;border-radius:999px;cursor:pointer;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+  .btn-ghost:hover{color:var(--text);border-color:var(--text)}
+  .admin{display:none;min-height:100vh;background:var(--bg-2)}
+  .admin.show{display:grid;grid-template-columns:260px 1fr}
+  .sidebar{background:#0c0c10;border-right:1px solid var(--line);padding:28px 20px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
+  .side-brand{display:flex;align-items:center;gap:12px;padding:0 8px 24px;border-bottom:1px solid var(--line);margin-bottom:16px}
+  .side-brand .brand-mark{width:34px;height:34px;font-size:14px}
+  .side-brand .t{font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:4px}
+  .side-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;color:var(--muted);cursor:pointer;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+  .side-item:hover{background:#15151a;color:var(--text)}
+  .side-item.active{background:rgba(201,169,110,.1);color:var(--gold)}
+  .side-spacer{flex:1}
+  .logout{color:var(--red)!important}
+  .main{padding:36px 48px}
+  .main-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+  .main-head h1{font-size:40px}
+  .main-head .sub{color:var(--muted);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:6px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .stat .l{color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+  .stat .v{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold);margin-top:8px}
+  .add-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:24px}
+  .add-panel h3{font-size:20px;margin-bottom:14px;color:var(--gold)}
+  .add-panel .row{display:flex;gap:10px;align-items:center}
+  .checkbox{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;user-select:none}
+  .checkbox input{accent-color:var(--gold)}
+  .table{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .table-head{display:grid;grid-template-columns:1fr 180px 200px;padding:16px 20px;border-bottom:1px solid var(--line);color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;background:#101015}
+  .row-item{display:grid;grid-template-columns:1fr 180px 200px;padding:16px 20px;border-bottom:1px solid var(--line);align-items:center;gap:14px;animation:fade .3s ease}
+  .row-item:last-child{border-bottom:none}
+  .row-item:hover{background:#16161c}
+  .row-text{font-size:14px;line-height:1.5;word-break:break-word}
+  .row-date{color:var(--muted);font-size:12px}
+  .row-actions{display:flex;gap:8px;justify-content:flex-end}
+  .icon-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--line-2);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:all .2s}
+  .icon-btn:hover{color:var(--gold);border-color:var(--gold)}
+  .icon-btn.danger:hover{color:var(--red);border-color:var(--red)}
+  .empty{padding:60px;text-align:center;color:var(--muted)}
+  textarea.input{resize:vertical;min-height:90px;font-family:inherit}
+  .toasts{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:100;pointer-events:none}
+  .toast{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;padding:14px 20px;color:var(--text);font-size:14px;box-shadow:var(--shadow);min-width:280px;animation:slidein .35s ease;pointer-events:auto}
+  .toast.success{border-left-color:var(--green)}
+  .toast.error{border-left-color:var(--red)}
+  .toast.info{border-left-color:var(--gold)}
+  .toast .title{font-weight:600;margin-bottom:2px;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
+  .toast.success .title{color:var(--green)}
+  .toast.error .title{color:var(--red)}
+  .toast .body{color:var(--muted);font-size:13px}
+  @keyframes slidein{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+  @keyframes slideout{to{opacity:0;transform:translateX(20px)}}
+  .toast.out{animation:slideout .25s ease forwards}
+  @media (max-width: 900px){
+    .hero{grid-template-columns:1fr;padding:40px 24px;gap:40px}
+    .nav{padding:18px 24px}
+    .nav-links{display:none}
+    .admin.show{grid-template-columns:1fr}
+    .sidebar{position:relative;height:auto;flex-direction:row;flex-wrap:wrap}
+    .side-spacer{display:none}
+    .main{padding:24px}
+    .stats{grid-template-columns:1fr}
+    .table-head,.row-item{grid-template-columns:1fr;gap:8px}
+    .table-head{display:none}
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>mkmk</h1>
-      <p>Zapisuj i odczytuj dane w czasie rzeczywistym</p>
-    </header>
 
-    <section class="card">
-      <h2>Dodaj wpis</h2>
-      <form id="dataForm">
-        <input type="text" id="textInput" placeholder="Wpisz tekst..." autocomplete="off" required />
-        <button type="submit" id="saveBtn">Zapisz</button>
-      </form>
-      <div class="status" id="status"></div>
-    </section>
+<div class="site" id="site">
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <div class="brand-name">MKMK</div>
+    </div>
+    <div class="nav-links">
+      <span>Kolekcja</span><span>O Nas</span><span>Tablica</span><span>Kontakt</span>
+    </div>
+  </nav>
 
-    <section class="card">
-      <h2>Zapisane dane</h2>
-      <ul id="dataList">
-        <li class="empty">Ładowanie danych...</li>
-      </ul>
-    </section>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Premium · Edition 2026</div>
+      <h1>Sztuka <em>detalu</em>.<br/>Luksus w każdej linii.</h1>
+      <p>Witaj na ekskluzywnej tablicy ogłoszeń MKMK. Dołącz do społeczności i zostaw swój ślad — każdy wpis pojawia się natychmiast u wszystkich gości.</p>
+      <button class="btn btn-solid" onclick="document.getElementById('newEntry').focus()">Dodaj wpis →</button>
+    </div>
+
+    <div class="hero-card">
+      <div class="feed-title">
+        <h3>Tablica na żywo</h3>
+        <span class="dot" title="Połączono"></span>
+      </div>
+      <div class="add-row">
+        <input id="newEntry" class="input" placeholder="Napisz coś pięknego..." maxlength="280"/>
+        <button class="btn btn-solid" onclick="addPublicEntry()">Dodaj</button>
+      </div>
+      <div id="publicFeed" class="feed">
+        <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Ładowanie wpisów...</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>© 2026 MKMK — Wszystkie prawa zastrzeżone</div>
+    <div class="lock" title="Strefa prywatna" onclick="openLogin()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    </div>
+  </footer>
+</div>
+
+<div class="modal-bg" id="loginModal">
+  <div class="modal">
+    <h2>Panel Administratora</h2>
+    <p>Wprowadź hasło aby uzyskać dostęp do zarządzania.</p>
+    <input id="loginPass" type="password" class="input" placeholder="Hasło" onkeydown="if(event.key==='Enter')tryLogin()"/>
+    <div class="actions">
+      <button class="btn-ghost" onclick="closeLogin()">Anuluj</button>
+      <button class="btn btn-solid" onclick="tryLogin()">Zaloguj</button>
+    </div>
   </div>
+</div>
 
-  <script type="module">
-    // --- Importy modułowego SDK Firebase (v10+) ---
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import {
-      getDatabase,
-      ref,
-      push,
-      onValue
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+<div class="modal-bg" id="editModal">
+  <div class="modal">
+    <h2>Edytuj wpis</h2>
+    <p>Wprowadź zmiany i zapisz.</p>
+    <textarea id="editText" class="input"></textarea>
+    <label class="checkbox" style="margin-top:12px"><input type="checkbox" id="editPriority"/> Priorytet (wyróżniony)</label>
+    <div class="actions">
+      <button class="btn-ghost" onclick="closeEdit()">Anuluj</button>
+      <button class="btn btn-solid" onclick="saveEdit()">Zapisz</button>
+    </div>
+  </div>
+</div>
 
-    // --- Konfiguracja Firebase ---
-    // Wklej tutaj swoje klucze z panelu Firebase (Ustawienia projektu > Twoje aplikacje).
-    const firebaseConfig = {
-      apiKey: "TWÓJ_API_KEY",
-      authDomain: "TWÓJ_AUTH_DOMAIN",
-      databaseURL: "TWÓJ_DATABASE_URL", // np. https://twoj-projekt-default-rtdb.europe-west1.firebasedatabase.app
-      projectId: "TWÓJ_PROJECT_ID",
-      storageBucket: "TWÓJ_STORAGE_BUCKET",
-      messagingSenderId: "TWÓJ_MESSAGING_SENDER_ID",
-      appId: "TWÓJ_APP_ID"
-    };
+<div class="admin" id="admin">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <div class="brand-mark">M</div>
+      <div class="t">MKMK · ADMIN</div>
+    </div>
+    <div class="side-item active">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </div>
+    <div class="side-item" onclick="document.getElementById('adminNew').focus()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Nowy wpis
+    </div>
+    <div class="side-spacer"></div>
+    <div class="side-item logout" onclick="logout()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Wyjdź z panelu
+    </div>
+  </aside>
 
-    // --- Inicjalizacja ---
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const dataRef = ref(db, "mkmk_dane");
+  <main class="main">
+    <div class="main-head">
+      <div>
+        <div class="sub">Zarządzanie · Live</div>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="sub" id="clock"></div>
+    </div>
 
-    // --- Elementy DOM ---
-    const form = document.getElementById("dataForm");
-    const input = document.getElementById("textInput");
-    const saveBtn = document.getElementById("saveBtn");
-    const statusEl = document.getElementById("status");
-    const list = document.getElementById("dataList");
+    <div class="stats">
+      <div class="stat"><div class="l">Wszystkie wpisy</div><div class="v" id="statTotal">0</div></div>
+      <div class="stat"><div class="l">Priorytetowe</div><div class="v" id="statPrio">0</div></div>
+      <div class="stat"><div class="l">Status bazy</div><div class="v" style="font-size:22px;letter-spacing:2px">● POŁĄCZONO</div></div>
+    </div>
 
-    function setStatus(message, type = "") {
-      statusEl.textContent = message;
-      statusEl.className = "status" + (type ? " " + type : "");
-    }
+    <div class="add-panel">
+      <h3>Dodaj nowy wpis</h3>
+      <div class="row">
+        <input id="adminNew" class="input" placeholder="Treść ogłoszenia..." maxlength="280" onkeydown="if(event.key==='Enter')adminAdd()"/>
+        <label class="checkbox"><input type="checkbox" id="adminPrio"/> Priorytet</label>
+        <button class="btn btn-solid" onclick="adminAdd()">Opublikuj</button>
+      </div>
+    </div>
 
-    // --- Zapis danych do węzła 'mkmk_dane' ---
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const text = input.value.trim();
-      if (!text) return;
+    <div class="table">
+      <div class="table-head">
+        <div>Treść</div><div>Data</div><div style="text-align:right">Akcje</div>
+      </div>
+      <div id="adminList"><div class="empty">Brak wpisów</div></div>
+    </div>
+  </main>
+</div>
 
-      saveBtn.disabled = true;
-      setStatus("Zapisywanie...");
+<div class="toasts" id="toasts"></div>
 
-      try {
-        await push(dataRef, {
-          text: text,
-          createdAt: Date.now()
-        });
-        input.value = "";
-        setStatus("Zapisano pomyślnie!", "success");
-      } catch (err) {
-        console.error("[mkmk] Błąd zapisu:", err);
-        setStatus("Błąd zapisu: " + (err?.message || err), "error");
-      } finally {
-        saveBtn.disabled = false;
-        input.focus();
-      }
-    });
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove, update }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-    // --- Odczyt w czasie rzeczywistym ---
-    onValue(
-      dataRef,
-      (snapshot) => {
-        const data = snapshot.val();
-        list.innerHTML = "";
+// ====== UZUPEŁNIONA KONFIGURACJĘ FIREBASE ======
+const firebaseConfig = {
+  apiKey: "AIzaSyAe6_0DkyqxC4FmMvP4rdY5-lLKUyuv7UY",
+  authDomain: "mkmk-618e7.firebaseapp.com",
+  databaseURL: "https://mkmk-618e7-default-rtdb.firebaseio.com",
+  projectId: "mkmk-618e7",
+  storageBucket: "mkmk-618e7.firebasestorage.app",
+  messagingSenderId: "942857686875",
+  appId: "1:942857686875:web:fb5fb7573319a69430d47e"
+};
+// ====== HASŁO ADMINA ======
+const ADMIN_PASSWORD = "mkmkadmin123";
 
-        if (!data) {
-          const li = document.createElement("li");
-          li.className = "empty";
-          li.textContent = "Brak danych. Dodaj pierwszy wpis!";
-          list.appendChild(li);
-          return;
-        }
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const entriesRef = ref(db, "entries");
 
-        // Zamieniamy obiekt na tablicę i sortujemy od najnowszych
-        const entries = Object.entries(data).map(([key, value]) => ({ key, ...value }));
-        entries.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+let currentEntries = [];
+let editingId = null;
 
-        for (const entry of entries) {
-          const li = document.createElement("li");
+function toast(title, body, type="info"){
+  const el = document.createElement("div");
+  el.className = "toast " + type;
+  el.innerHTML = `<div class="title">${title}</div><div class="body">${body}</div>`;
+  document.getElementById("toasts").appendChild(el);
+  setTimeout(()=>{ el.classList.add("out"); setTimeout(()=>el.remove(), 250); }, 3200);
+}
 
-          const span = document.createElement("span");
-          span.textContent = entry.text ?? "(brak tekstu)";
-          li.appendChild(span);
+function renderPublic(){
+  const feed = document.getElementById("publicFeed");
+  if(!currentEntries.length){
+    feed.innerHTML = `<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Bądź pierwszy — dodaj wpis ✨</div>`;
+    return;
+  }
+  feed.innerHTML = currentEntries.map(e => `
+    <div class="entry ${e.priority?'priority':''}">
+      <div>
+        ${e.priority?'<span class="priority-tag">★ Priorytet</span>':''}
+        <span>${escapeHtml(e.text)}</span>
+        <div class="meta">${formatDate(e.ts)}</div>
+      </div>
+    </div>
+  `).join("");
+}
 
-          if (entry.createdAt) {
-            const time = document.createElement("span");
-            time.className = "time";
-            time.textContent = new Date(entry.createdAt).toLocaleString("pl-PL");
-            li.appendChild(time);
-          }
+function renderAdmin(){
+  const list = document.getElementById("adminList");
+  document.getElementById("statTotal").textContent = currentEntries.length;
+  document.getElementById("statPrio").textContent = currentEntries.filter(e=>e.priority).length;
+  if(!currentEntries.length){
+    list.innerHTML = `<div class="empty">Brak wpisów w bazie</div>`;
+    return;
+  }
+  list.innerHTML = currentEntries.map(e => `
+    <div class="row-item">
+      <div class="row-text">
+        ${e.priority?'<span class="priority-tag">★</span>':''}
+        ${escapeHtml(e.text)}
+      </div>
+      <div class="row-date">${formatDate(e.ts)}</div>
+      <div class="row-actions">
+        <button class="icon-btn" title="Edytuj" onclick="window.__edit('${e.id}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+        <button class="icon-btn danger" title="Usuń" onclick="window.__del('${e.id}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 01-2 2H9a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a2 2 0 012-2h2a2 2 0 012 2v2"/></svg>
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
 
-          list.appendChild(li);
-        }
-      },
-      (err) => {
-        // Obsługa błędów (np. zablokowany odczyt przez reguły bezpieczeństwa)
-        console.error("[mkmk] Błąd odczytu:", err);
-        list.innerHTML = "";
-        const li = document.createElement("li");
-        li.className = "empty";
-        li.textContent = "Nie udało się pobrać danych: " + (err?.message || err);
-        list.appendChild(li);
-      }
-    );
-  </script>
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function formatDate(ts){if(!ts)return"—";const d=new Date(ts);return d.toLocaleString("pl-PL",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})}
+
+onValue(entriesRef, snap => {
+  const val = snap.val() || {};
+  currentEntries = Object.entries(val).map(([id,v])=>({id,...v}))
+    .sort((a,b)=>(b.ts||0)-(a.ts||0));
+  renderPublic();
+  if(document.getElementById("admin").classList.contains("show")) renderAdmin();
+}, err => {
+  toast("Błąd bazy", err.message, "error");
+});
+
+window.addPublicEntry = async () => {
+  const input = document.getElementById("newEntry");
+  const text = input.value.trim();
+  if(!text){ toast("Uwaga","Wpis nie może być pusty","error"); return; }
+  try{
+    await push(entriesRef, { text, priority:false, ts: Date.now() });
+    input.value = "";
+    toast("Dodano","Twój wpis pojawił się na tablicy","success");
+  }catch(e){ toast("Błąd", e.message, "error"); }
+};
+
+window.openLogin = ()=>{ document.getElementById("loginModal").classList.add("show"); setTimeout(()=>document.getElementById("loginPass").focus(),50); };
+window.closeLogin = ()=>{ document.getElementById("loginModal").classList.remove("show"); document.getElementById("loginPass").value=""; };
+window.tryLogin = ()=>{
+  const v = document.getElementById("loginPass").value;
+  if(v === ADMIN_PASSWORD){
+    closeLogin();
+    document.getElementById("site").style.display = "none";
+    document.getElementById("admin").classList.add("show");
+    renderAdmin();
+    toast("Witaj","Zalogowano jako Administrator","success");
+  } else {
+    toast("Odmowa dostępu","Nieprawidłowe hasło","error");
+  }
+};
+window.logout = ()=>{
+  document.getElementById("admin").classList.remove("show");
+  document.getElementById("site").style.display = "";
+  toast("Wylogowano","Powrót do widoku publicznego","info");
+};
+
+window.adminAdd = async ()=>{
+  const i = document.getElementById("adminNew");
+  const p = document.getElementById("adminPrio");
+  const text = i.value.trim();
+  if(!text){ toast("Uwaga","Treść wymagana","error"); return; }
+  try{
+    await push(entriesRef, { text, priority:p.checked, ts: Date.now() });
+    i.value=""; p.checked=false;
+    toast("Opublikowano","Nowy wpis dodany do bazy","success");
+  }catch(e){ toast("Błąd", e.message, "error"); }
+};
+
+window.__del = async (id) => {
+  if(!confirm("Usunąć wpis bezpowrotnie?")) return;
+  try{
+    await remove(ref(db, "entries/"+id));
+    toast("Usunięto","Pomyślnie usunięto wpis z bazy","success");
+  }catch(e){ toast("Błąd", e.message, "error"); }
+};
+
+window.__edit = (id) => {
+  const e = currentEntries.find(x=>x.id===id);
+  if(!e) return;
+  editingId = id;
+  document.getElementById("editText").value = e.text;
+  document.getElementById("editPriority").checked = !!e.priority;
+  document.getElementById("editModal").classList.add("show");
+};
+window.closeEdit = ()=>{ document.getElementById("editModal").classList.remove("show"); editingId=null; };
+window.saveEdit = async ()=>{
+  if(!editingId) return;
+  const text = document.getElementById("editText").value.trim();
+  const priority = document.getElementById("editPriority").checked;
+  if(!text){ toast("Uwaga","Treść nie może być pusta","error"); return; }
+  try{
+    await update(ref(db, "entries/"+editingId), { text, priority });
+    closeEdit();
+    toast("Zapisano","Wpis został zaktualizowany","success");
+  }catch(e){ toast("Błąd", e.message, "error"); }
+};
+
+setInterval(()=>{
+  const el = document.getElementById("clock");
+  if(el) el.textContent = new Date().toLocaleString("pl-PL");
+}, 1000);
+</script>
 </body>
 </html>
