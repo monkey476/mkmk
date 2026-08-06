@@ -1,57 +1,48 @@
-const { Client, GatewayIntentBits } = require('discord.js');
-const http = require('http');
-const https = require('https'); // Wymagane do pingowania linków Rendera (https)
+const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const fs = require('node:fs');
+const path = require('node:path');
 
-// Tworzenie instancji bota ze wszystkimi potrzebnymi uprawnieniami
+// Tworzenie instancji bota z odpowiednimi uprawnieniami (Intents)
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers, 
-        GatewayIntentBits.GuildInvites
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMembers
     ]
 });
 
-// --- PROSTY SERWER WWW DLA HOSTINGU ---
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Bot Side Community Ziomeczki.gg dziala 24/7 i jest aktywny!\n');
-});
+// Kolekcja na komendy
+client.commands = new Collection();
 
-server.listen(3000, () => {
-    console.log('🌐 Serwer WWW dla utrzymania aktywności ruszył na porcie 3000.');
-    
-    // --- WBUDOWANY SYSTEM ANTI-SLEEP (DLA RENDERA) ---
-    // Bot sam będzie "odwiedzał" swoją własną stronę co 10 minut, by zapobiec uśpieniu.
-    setInterval(() => {
-        // Render automatycznie podstawia tu Twój publiczny link. Jeśli z jakiegoś powodu go nie ma, użyje localhost.
-        const url = process.env.RENDER_EXTERNAL_URL || 'http://localhost:3000';
-        
-        console.log(`[Anti-Sleep] Wysyłam ping do: ${url}`);
-        
-        if (url.startsWith('https')) {
-            https.get(url, (res) => {
-                console.log(`[Anti-Sleep] Sukces! Status HTTP: ${res.statusCode}`);
-            }).on('error', (err) => {
-                console.error('[Anti-Sleep] Błąd pingowania (https):', err.message);
-            });
-        } else {
-            http.get(url, (res) => {
-                console.log(`[Anti-Sleep] Sukces! Status HTTP: ${res.statusCode}`);
-            }).on('error', (err) => {
-                console.error('[Anti-Sleep] Błąd pingowania (http):', err.message);
-            });
-        }
-    }, 10 * 60 * 1000); // 10 minut (10 * 60 * 1000 milisekund)
-});
-
-// --- URUCHOMIENIE BOTA I WSZYSTKICH MODUŁÓW ---
 client.once('ready', () => {
-    console.log(`✅ Zalogowano pomyślnie jako: ${client.user.tag}`);
+    console.log(`[BOT] Zalogowano pomyślnie jako ${client.user.tag}!`);
     
-    // Ładowanie wszystkich systemów bota
+    // Nowy status bota dotyczący CS2 i komendy pomocy
+    client.user.setActivity('!help | BEST player cs2', { type: 0 }); 
 });
 
-// Logowanie za pomocą zmiennej środowiskowej DISCORD_TOKEN
+// Automatyczne wczytywanie modułów/plików z tego samego folderu
+const loadModules = () => {
+    // Tutaj wpisz nazwy plików z modułami, które chcesz włączyć
+    const modules = ['musico.js']; 
+
+    for (const file of modules) {
+        try {
+            const filePath = path.join(__dirname, file);
+            if (fs.existsSync(filePath)) {
+                require(filePath)(client);
+                console.log(`[MODUŁ] Pomyślnie wczytano moduł: ${file}`);
+            }
+        } catch (error) {
+            console.error(`[BŁĄD] Nie udało się wczytać modułu ${file}:`, error);
+        }
+    }
+};
+
+// Uruchomienie ładowania modułów po wystartowaniu
+loadModules();
+
+// Logowanie bota przy użyciu tokena
 client.login(process.env.DISCORD_TOKEN);
